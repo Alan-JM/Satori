@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linersito"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:padding="12dp"
+    android:gravity="center_vertical"
+    android:background="@color/blanco_hueso"
+    android:layout_marginBottom="8dp">
+
+    <!-- Nombre del operador -->
+    <TextView
+        android:id="@+id/nombreOperador"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.45"
+        android:text="Operador X"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/negro_suave"
+        android:paddingEnd="6dp"/>
+
+    <!-- Icono enviado -->
+    <ImageView
+        android:id="@+id/enviado"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_weight="0.125"
+        android:src="@drawable/doblecirculo"
+        android:tint="@color/naranja_boton"
+        android:layout_marginEnd="4dp"/>
+
+    <!-- Icono en progreso -->
+    <ImageView
+        android:id="@+id/oprogreso"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_weight="0.125"
+        android:src="@drawable/triangulor"
+        android:tint="@color/naranja_boton"
+        android:layout_marginEnd="4dp"/>
+
+    <!-- Icono lápiz -->
+    <ImageView
+        android:id="@+id/lapiz"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_weight="0.125"
+        android:src="@drawable/lapiz"
+        android:tint="@color/negro_suave"
+        android:layout_marginEnd="4dp"/>
+
+    <!-- Icono bote -->
+    <ImageView
+        android:id="@+id/bote"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_weight="0.125"
+        android:src="@drawable/bote"
+        android:tint="@color/negro_suave"/>
+</LinearLayout>

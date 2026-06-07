@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainViajes"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/naranja_fondo"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tituloViajes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Viajes"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/blanco_hueso"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Lista de operadores -->
+    <ListView
+        android:id="@+id/listaOperadores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/blanco_hueso"
+        android:dividerHeight="4dp"
+        android:layout_below="@id/tituloViajes"
+        android:layout_above="@id/btnCrearViaje"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Botón ayuda circular -->
+    <ImageButton
+        android:id="@+id/btnAyuda"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ayudacirculo"
+        android:background="@android:color/transparent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:contentDescription="Ayuda" />
+
+    <!-- Botón crear viaje -->
+    <Button
+        android:id="@+id/btnCrearViaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Viaje"
+        android:textStyle="bold"
+        android:textColor="@color/blanco_hueso"
+        android:backgroundTint="@color/naranja_boton"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="12dp"/>
+</RelativeLayout>

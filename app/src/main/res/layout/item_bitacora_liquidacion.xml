@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@android:color/white">
+
+    <!-- CheckBox cuadrado para seleccionar bitácora -->
+    <CheckBox
+        android:id="@+id/checkBitacora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/orange"/>
+
+    <!-- Contenedor de datos de la bitácora -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="12dp">
+
+        <!-- Folio -->
+        <TextView
+            android:id="@+id/tvFolioBitacora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Folio: 0"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <!-- Gasto total -->
+        <TextView
+            android:id="@+id/tvGastoBitacora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gasto total: $0.00"
+            android:textColor="@color/black"
+            android:textSize="13sp"/>
+
+        <!-- Importe de anticipos -->
+        <TextView
+            android:id="@+id/tvAnticiposBitacora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anticipos: $0.00"
+            android:textColor="@color/black"
+            android:textSize="13sp"/>
+
+        <!-- Tiempo del viaje -->
+        <TextView
+            android:id="@+id/tvTiempoBitacora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiempo: 0h"
+            android:textColor="@color/black"
+            android:textSize="13sp"/>
+
+        <!-- Distancia recorrida -->
+        <TextView
+            android:id="@+id/tvDistanciaBitacora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distancia: 0 km"
+            android:textColor="@color/black"
+            android:textSize="13sp"/>
+    </LinearLayout>
+</LinearLayout>

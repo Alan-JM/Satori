@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".Anticipos.Administradores.VerAnticipos">
+
+    <!-- Contenedor estilizado para la lista -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp">
+
+        <ListView
+            android:id="@+id/anticiposRegistrados"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/orange"
+            android:dividerHeight="1dp"
+            android:padding="8dp"/>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/nombreDetalle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView android:id="@+id/telefonoDetalle"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView android:id="@+id/correoDetalle"
+        android:textColor="@color/blue_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RadioGroup android:id="@+id/radioGroup"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioAdmin"
+            android:layout_width="135dp"
+            android:buttonTint="@color/blue"
+            android:layout_height="30dp"
+            android:text="Administrador"
+            android:textColor="@color/orange" />
+        <RadioButton android:id="@+id/radioOperador"
+            android:text="Operador"
+            android:buttonTint="@color/blue"
+            android:textColor="@color/blue" android:layout_height="30dp" android:layout_width="100dp"/>
+    </RadioGroup>
+
+    <TextView android:id="@+id/claveGenerada"
+        android:text="Clave generada"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/btnGenerarClave"
+        android:text="Generar clave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Spinner android:id="@+id/spinnerOpciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView android:id="@+id/adminLabel"
+        android:text="Administrador"
+        android:textColor="@color/orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/btnEnviarCorreo"
+        android:text="Correo final"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

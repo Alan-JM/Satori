@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/naranja_fondo"
+    tools:context=".Bitacoras.Operador.NuevaBitacora2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bitácora de Servicios"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/rob_bold"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Subtítulo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingresa los datos solicitados para crear una Bitácora"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:fontFamily="@font/rob_med"
+            android:gravity="center"
+            android:alpha="0.7"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Sección Kilometraje -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/naranja_suave"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="KILOMETRAJE Y RENDIMIENTO"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Tabla Kilometraje -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginHorizontal="20dp"
+            android:background="@android:color/transparent">
+
+            <TableRow>
+                <TextView
+                    android:text="Odómetro Inicial"
+                    android:padding="8dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:text="Km"
+                    android:padding="8dp"/>
+                <EditText
+                    android:id="@+id/odometroInicialBitacora"
+                    android:padding="8dp"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Odómetro Final"
+                    android:padding="8dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:text="Km"
+                    android:padding="8dp"/>
+                <EditText
+                    android:id="@+id/odometroFinalBitacora"
+                    android:padding="8dp"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Distancia Total"
+                    android:padding="8dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:text="Km"
+                    android:padding="8dp"/>
+                <TextView
+                    android:id="@+id/distanciaTotalBitacora"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+            </TableRow>
+
+
+            <TableRow>
+                <TextView
+                    android:text="Combustible Consumido"
+                    android:padding="8dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:text="Lt"
+                    android:padding="8dp"/>
+                <EditText
+                    android:id="@+id/combustibleConsumidoBitacora"
+                    android:padding="8dp"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- Sección Conceptos -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/naranja_suave"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="CONCEPTOS"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ListView de anticipos -->
+        <ListView
+            android:id="@+id/listViewAnticipos"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="24dp"/>
+
+
+
+
+
+        <!-- Botones finales -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="32dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/atrasBitacora"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="ATRÁS"
+                android:textColor="@color/blanco_hueso"
+                app:strokeColor="@color/blanco_hueso"
+                app:strokeWidth="2dp"
+                app:cornerRadius="16dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/siguienteBitacora"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="SIGUIENTE"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/naranja_boton"
+                app:cornerRadius="16dp"
+                app:elevation="4dp"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

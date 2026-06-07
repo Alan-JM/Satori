@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/naranja_fondo"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Cabecera Dinámica -->
+        <TextView
+            android:id="@+id/tvTituloHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Configurar Viaje"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="28sp"
+            android:fontFamily="@font/rob_med"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvSubtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complete los detalles para la nueva entrega"
+            android:textColor="#CCFFFFFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Card de Formulario -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            android:layout_marginBottom="32dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!--  Destino -->
+                <TextView style="@style/LabelEstilo" android:text="Destino del Viaje" />
+                <EditText
+                    android:id="@+id/etDestino"
+                    style="@style/InputEstilo"
+                    android:hint="Ej. A "
+                    android:drawableStart="@drawable/ic_location" />
+
+                <!--  Cliente -->
+                <TextView style="@style/LabelEstilo" android:text="Cliente" />
+                <EditText
+                    android:id="@+id/etCliente"
+                    style="@style/InputEstilo"
+                    android:hint="Ej. Empresa R "
+                    android:drawableStart="@drawable/ic_person" />
+
+
+                <!--  Fecha y Hora -->
+                <TextView style="@style/LabelEstilo" android:text="Programación" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etFecha"
+                        style="@style/InputEstilo"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="Fecha"
+                        android:layout_marginEnd="12dp"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_calendar" />
+
+                    <EditText
+                        android:id="@+id/etHora"
+                        style="@style/InputEstilo"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="Hora"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:drawableStart="@drawable/ic_time" />
+                </LinearLayout>
+
+                <!-- Resumen Visual -->
+                <TextView
+                    android:id="@+id/tvResumenFechaHora"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F5F5F5"
+                    android:padding="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Programa la fecha de entrega"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:textColor="@color/negro_suave"/>
+
+                <!-- Operador -->
+                <TextView style="@style/LabelEstilo" android:text="Operador Asignado" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_background"
+                    android:layout_marginBottom="16dp">
+                    <Spinner
+                        android:id="@+id/spinnerOperador"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:paddingStart="12dp" />
+                </FrameLayout>
+
+                <!-- Folio -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Folio:"
+                        android:textStyle="bold"
+                        android:textColor="@color/negro_suave" />
+                    <TextView
+                        android:id="@+id/tvFolioAutollenado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:hint="---"
+                        android:textColor="@color/naranja_boton"
+                        android:textSize="18sp"
+                        android:fontFamily="monospace" />
+                </LinearLayout>
+
+                <!-- Contraseña -->
+                <TextView style="@style/LabelEstilo" android:text="Confirmación de Seguridad" />
+                <EditText
+                    android:id="@+id/etPassword"
+                    style="@style/InputEstilo"
+                    android:hint="Ingrese clave"
+                    android:inputType="textPassword"
+                    android:drawableStart="@drawable/ic_lock" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botonera Inferior -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/atras"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="CANCELAR"
+                android:textColor="@color/blanco_hueso"
+                app:rippleColor="#33FFFFFF" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/crear"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1.5"
+                android:text="CONFIRMAR VIAJE"
+                app:backgroundTint="@color/naranja_boton"
+                android:textColor="@android:color/white"
+                app:cornerRadius="16dp"
+                app:elevation="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

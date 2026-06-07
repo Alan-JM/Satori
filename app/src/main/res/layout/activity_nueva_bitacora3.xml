@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/naranja_fondo"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bitácora de Servicios"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Sección Gastos Tarjeta -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/naranja_suave"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="GASTOS TARJETA / CRÉDITO"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Bloque Combustible Tarjeta -->
+        <!-- Etiqueta del gasto -->
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Combustible"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+        <include
+            layout="@layout/item_calculador"
+            android:id="@+id/blockCombustibleT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <!-- Bloque Casetas Tarjeta -->
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casetas"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockCasetasT"   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <!-- Subtotal Tarjeta -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subtotal Tarjeta:"
+            android:textStyle="bold"
+            android:textColor="@color/blanco_hueso"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/tvSubtotalTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textStyle="bold"
+            android:textColor="@color/blanco_hueso"/>
+
+        <!-- Sección Gastos Efectivo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/naranja_suave"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="GASTOS EN EFECTIVO"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Bloques de gastos en efectivo -->
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Combustible"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockCombustibleE"   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casetas"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockCasetasE"   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comida"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockComida"   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reparaciones"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockReparaciones"   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maniobras"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockManiobras"   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transito/Federal"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockTransitos"  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Otros"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="2dp"/>
+
+        <include layout="@layout/item_calculador" android:id="@+id/blockOtros"   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <!-- Subtotal Efectivo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subtotal Efectivo:"
+            android:textStyle="bold"
+            android:textColor="@color/blanco_hueso"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/tvSubtotalEfectivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textStyle="bold"
+            android:textColor="@color/blanco_hueso"/>
+
+        <!-- Gran Total -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gran Total:"
+            android:textStyle="bold"
+            android:textColor="@color/blanco_hueso"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/tvGranTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textStyle="bold"
+            android:textColor="@color/blanco_hueso"/>
+
+        <!-- Botones finales -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="32dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/atrasBitacora"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="ATRÁS"
+                android:textColor="@color/blanco_hueso"
+                app:strokeColor="@color/blanco_hueso"
+                app:strokeWidth="2dp"
+                app:cornerRadius="16dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/siguienteBitacora"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="GUARDAR"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/green"
+                app:cornerRadius="16dp"
+                app:elevation="4dp"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Satori</string>
+
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_bitacoras">Bitacora</string>
+    <string name="menu_anticipos">Anticipos</string>
+    <string name="menu_liquidacion">Liquidacion</string>
+    <string name="menu_admin">Viajes</string>
+    <string name="menu_supervisor">Trabajadores</string>
+    <string name="menu_rechazo">Rechazos</string>
+    <string name="menu_viajesop">Viajes</string>
+    <string name="menu_liquidacionop">Liquidaciones</string>
+    <string name="menu_estadistacas">Estadisticas</string>
+
+    <string name="navigation_drawer_open">Abrir menú de navegación</string>
+    <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+
+    <string name="home_placeholder">Espacio para agregar ejercicios o ejemplos de la sección de inicio.</string>
+    <string name="profile_placeholder">Espacio para agregar ejercicios o ejemplos relacionados con el perfil.</string>
+    <string name="settings_placeholder">Espacio para agregar ejercicios o ejemplos de la sección de ajustes.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- Aca esta la ip para que la modifiquen , no olviden cambiarla en el network_security_config -->
+    <string name="ip">ipp</string>
+    <string name="url_ip">http://ipp</string>
+    <string name="base_url">http://ipp/xx/xx/</string>
+
+
+</resources>

@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey"
+    tools:context=".Bitacoras.AccionesBitacoraAdminFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="24dp"
+        android:padding="2dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Revisión de Bitácora"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/rob_bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- SECCIÓN 1: DATOS GENERALES -->
+
+            <!-- Fecha -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_bold"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/fechaBitacoraDetalleAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="DD/MM/AAAA"
+                android:inputType="date"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Operador -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Operador"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_bold"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/operadorBitacoraDetalleAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre completo"
+                android:inputType="textCapWords"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Unidad Eco -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unidad Eco"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_bold"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/ecoBitacoraDetalleAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Número de unidad"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Cliente -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cliente"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_bold"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/clienteBitacoraDetalleAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre del cliente"
+                android:inputType="textCapWords"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Destino -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Destino"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_bold"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/destinoBitacoraDetalleAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Destino"
+                android:inputType="textCapWords"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Ayudantes -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ayudantes"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_bold"
+                android:layout_marginBottom="4dp" />
+
+            <EditText
+                android:id="@+id/ayudantesBitacoraDetalleAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombres de ayudantes"
+                android:inputType="textCapWords"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:background="@drawable/edittext_background"
+                android:layout_marginBottom="32dp" />
+
+            <!-- SECCIÓN 2: KILOMETRAJE Y RENDIMIENTO -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="KILOMETRAJE Y RENDIMIENTO"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:background="@color/white">
+
+                <TableRow>
+                    <TextView
+                        android:text="Odometro Inicial"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Km"
+                        android:padding="8dp" />
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/odometroInicialBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Odometro Final"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Km"
+                        android:padding="8dp" />
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/odometroFinalBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Distancia Total"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Lt"
+                        android:padding="8dp" />
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/distanciaTotalBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Combustible Consumido"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Km/Lt"
+                        android:padding="8dp" />
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/combustibleConsumidoBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:layout_marginTop="20dp"
+                android:background="@color/white">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="185dp"
+                        android:background="@color/orange"
+                        android:padding="8dp"
+                        android:text="CONCEPTO"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:text="FECHA"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@color/orange"/>
+                    <TextView
+                        android:text="IMPORTE"
+                        android:textStyle="bold"
+                        android:padding="8dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@color/orange"/>
+                </TableRow>
+
+                <TableRow>
+                    <EditText
+                        android:padding="8dp"
+                        android:inputType="text"
+                        android:enabled="false"
+                        android:id="@+id/concepto1BitacoraDetalleAdmin"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:inputType="datetime"
+                        android:enabled="false"
+                        android:id="@+id/fecha1BitacoraDetalleAdmin"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/importe1BitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal" />
+                </TableRow>
+
+                <TableRow>
+                    <EditText
+                        android:padding="8dp"
+                        android:inputType="text"
+                        android:enabled="false"
+                        android:id="@+id/concepto2BitacoraDetalleAdmin"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:inputType="datetime"
+                        android:enabled="false"
+                        android:id="@+id/fecha2BitacoraDetalleAdmin"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/importe2BitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal" />
+                </TableRow>
+
+                <TableRow>
+                    <EditText
+                        android:padding="8dp"
+                        android:inputType="text"
+                        android:enabled="false"
+                        android:id="@+id/concepto3BitacoraDetalleAdmin"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:inputType="datetime"
+                        android:enabled="false"
+                        android:id="@+id/fecha3BitacoraDetalleAdmin"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/importe3BitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="8dp"/>
+                    <TextView
+                        android:text="Total"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="$0.00"
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:id="@+id/totalBitacoraDetalleAdmin"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <!-- SECCIÓN 3: GASTOS -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="GASTOS TARJETA/CREDITO"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:background="@color/white">
+
+                <TableRow>
+                    <TextView
+                        android:text="Combustible"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/combustibleBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Casetas"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/casetasBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Subtotal Gts. Tarjeta"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/subtotalGastosTarjetaBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="GASTOS EN EFECTIVO"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:background="@color/white">
+
+                <TableRow>
+                    <TextView
+                        android:text="Combustible"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/combustible2BitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Casetas"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/casetas2BitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Comida"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/comidaBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Reparaciones"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/reparacionesBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Maniobras"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/maniobrasBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Transitos/Federal"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/transitosFederalBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Otros"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/otrosBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Subtotal Gts"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:padding="8dp"
+                        android:id="@+id/subtotalGastosBitacoraDetalleAdmin"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Gran Total"
+                        android:padding="8dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:id="@+id/granTotalBitacoraDetalleAdmin"
+                        android:text="$0.00"/>
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- BOTONES DE ACCIÓN DEL ADMINISTRADOR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/grey">
+
+        <!-- Botón Autorizar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAutorizarBitacoraAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="AUTORIZAR"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/green"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Botón Rechazar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRechazarBitacoraAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="RECHAZAR"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#F44336"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Botón Desautorizar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDesautorizarBitacoraAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="DESAUTORIZAR"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/orange"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Botón Volver -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVolverBitacoraAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="VOLVER"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/grey" />
+
+    </LinearLayout>
+
+</LinearLayout>

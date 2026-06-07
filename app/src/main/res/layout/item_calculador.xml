@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+
+
+    <!-- Bloque calculador compacto -->
+    <LinearLayout
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_capsule"
+        android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="6dp">
+
+    <ImageButton
+        android:id="@+id/btnMinus"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_menos" />
+
+    <EditText
+        android:id="@+id/etMinus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:hint="0.00"
+        android:inputType="numberDecimal"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:text="0.00"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/etPlus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:hint="0.00"
+        android:inputType="numberDecimal"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/btnPlus"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_mas" />
+</LinearLayout>
+
+</LinearLayout>

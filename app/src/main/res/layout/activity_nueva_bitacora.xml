@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/naranja_fondo"
+    tools:context=".Bitacoras.Operador.NuevaBitacora1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bitácora de Servicios"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/rob_bold"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Subtítulo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingresa los datos solicitados para crear una Bitácora"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="13sp"
+            android:fontFamily="@font/rob_med"
+            android:gravity="center"
+            android:alpha="0.8"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Campo Fecha -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="     Fecha"
+            app:startIconDrawable="@drawable/ic_calendar"
+            app:startIconTint="@color/black"
+            app:boxStrokeColor="@color/naranja_boton"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fechaBitacora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Operador -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="     Operador"
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconTint="@color/black"
+            app:boxStrokeColor="@color/naranja_boton"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/operadorBitacora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Unidad Eco -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="     Unidad Eco"
+            app:startIconDrawable="@drawable/ic_truck"
+            app:startIconTint="@color/black"
+            app:boxStrokeColor="@color/naranja_boton"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ecoBitacora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Cliente -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="     Cliente"
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconTint="@color/black"
+            app:boxStrokeColor="@color/naranja_boton"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/clienteBitacora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Destino -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="     Destino"
+            app:startIconDrawable="@drawable/ic_location"
+            app:startIconTint="@color/black"
+            app:boxStrokeColor="@color/naranja_boton"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/destinoBitacora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Ayudantes -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="      Ayudantes"
+            app:startIconDrawable="@drawable/ic_group"
+            app:startIconTint="@color/black"
+            app:boxStrokeColor="@color/naranja_boton"
+            android:layout_marginBottom="32dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ayudantesBitacora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/atrasBitacora"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="ATRÁS"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                app:cornerRadius="16dp"
+                app:strokeColor="@android:color/white"
+                app:strokeWidth="2dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/siguienteBitacora"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="SIGUIENTE"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                app:cornerRadius="16dp"
+                app:backgroundTint="@color/naranja_boton"
+                app:elevation="4dp"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Footer -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.6"
+            android:fontFamily="@font/rob_norm"
+            android:gravity="center"
+            android:text="Aristo S.A.S. 2025"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="12sp"
+            android:layout_marginTop="40dp"/>
+    </LinearLayout>
+</ScrollView>

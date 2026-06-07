@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores principales -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Tonos grises -->
+    <color name="grey">#BF040303</color>
+    <color name="grey_light">#E0E0E0</color>
+    <color name="grey_dark">#212121</color>
+
+    <!-- Paleta naranja -->
+    <color name="orange">#FF9800</color>
+    <color name="orange_dark">#F57C00</color>
+    <color name="orange_light">#FFE0B2</color>
+
+    <!-- Verde de acento -->
+    <color name="green">#4CAF50</color>
+    <color name="green_dark">#388E3C</color>
+    <color name="green_light">#C8E6C9</color>
+
+    <!-- Azul opcional para resaltar -->
+    <color name="blue">#2196F3</color>
+    <color name="blue_dark">#1976D2</color>
+    <color name="blue_light">#BBDEFB</color>
+
+    <color name="amarillo">#C5B52F</color>
+    <color name="yellow_light">#FFF769</color>
+    <color name="red_light">#FF766B</color>
+
+
+    <color name="naranja_fondo">#A66D4F</color> <!-- Naranja opaco/oscuro -->
+    <color name="naranja_boton">#D98252</color> <!-- Naranja pastel más vivo para el botón -->
+    <color name="blanco_hueso">#F5F5F5</color>  <!-- Para los textos secundarios -->
+    <color name="naranja_suave">#FFB74D</color> <!-- Naranja claro, cálido -->
+    <color name="naranja_pastel">#FFE5B4</color>
+
+    <color name="negro_suave">#212121</color>
+</resources>

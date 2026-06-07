@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@color/grey">
+
+    <!-- IdFolio y Fecha en la misma línea -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="6dp">
+
+        <TextView
+            android:id="@+id/idFolio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="IdFolio"
+            android:textColor="@color/orange"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/rob_bold"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fecha"
+            android:textColor="@color/orange"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/rob_bold" />
+    </LinearLayout>
+
+    <!-- Motivo -->
+    <TextView
+        android:id="@+id/motivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Motivo..."
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:fontFamily="@font/rob_ital2"
+        android:ellipsize="end"
+        android:singleLine="true" />
+
+</LinearLayout>

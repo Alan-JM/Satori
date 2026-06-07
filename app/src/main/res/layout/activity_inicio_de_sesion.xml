@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/naranja_fondo"
+    android:padding="24dp"
+    tools:context=".InicioDeSesion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Contenedor del login -->
+        <LinearLayout
+            android:id="@+id/loginContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Logo centrado -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="197dp"
+                android:layout_height="207dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                app:srcCompat="@drawable/satoric" />
+
+            <!-- Título -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inicio de Sesión"
+                android:textColor="@color/blanco_hueso"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_bold"
+                android:gravity="center"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingresa tu teléfono y contraseña registrados"
+                android:textColor="@color/blanco_hueso"
+                android:textSize="13sp"
+                android:fontFamily="@font/rob_med"
+                android:gravity="center"
+                android:alpha="0.8"
+                android:layout_marginBottom="32dp" />
+
+            <!-- Teléfono -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teléfono"
+                android:textColor="@color/blanco_hueso"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_med"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
+                android:id="@+id/telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="+52 0000 0000"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="20dp" />
+
+            <!-- Contraseña -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contraseña"
+                android:textColor="@color/blanco_hueso"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_med"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
+                android:id="@+id/contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="********"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="20dp" />
+
+            <!-- Clave de trabajador -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clave de trabajador (opcional)"
+                android:textColor="@color/blanco_hueso"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/rob_med"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
+                android:id="@+id/claveAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu clave de trabajador"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:background="@drawable/edittext_background"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginHorizontal="20dp" />
+
+            <!-- Botón de Inicio -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/InicioDeSesion"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="INICIO DE SESIÓN"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                app:backgroundTint="@color/naranja_boton"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="24dp"
+                android:layout_marginHorizontal="20dp"
+                app:elevation="4dp" />
+
+            <!-- Registro -->
+            <TextView
+                android:id="@+id/registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¿Aún no estás registrado?"
+                android:textColor="@color/blanco_hueso"
+                android:textSize="13sp"
+                android:fontFamily="@font/rob_med"
+                android:gravity="center"
+                android:alpha="0.8"
+                android:layout_marginBottom="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Registro"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="REGISTRO"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                app:strokeColor="@android:color/white"
+                app:strokeWidth="2dp"
+                android:layout_marginHorizontal="20dp" />
+
+        </LinearLayout>
+        <!-- Animación de carga (Truck) -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/truckAnimation"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="80dp"
+            android:visibility="gone"
+            app:lottie_rawRes="@raw/truck_running"
+            app:lottie_loop="true"/>
+
+        <!-- Copyright -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/rob_norm"
+            android:gravity="center"
+            android:text="Aristo S.A.S. 2025"
+            android:textColor="@color/blanco_hueso"
+            android:textSize="12sp"
+            android:alpha="0.6" />
+
+    </LinearLayout>
+</ScrollView>

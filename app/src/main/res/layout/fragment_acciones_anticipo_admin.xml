@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/grey"
+    android:padding="24dp">
+
+    <!-- Scroll para los detalles -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detalles del Anticipo"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Card con los datos -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvFolioDetalleAnticipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Folio:" />
+
+                    <TextView
+                        android:id="@+id/tvFechaDetalleAnticipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha:" />
+
+                    <TextView
+                        android:id="@+id/tvOperadorDetalleAnticipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Unidad:" />
+
+                    <TextView
+                        android:id="@+id/tvNombreOperadorDetalleAnticipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Operador:" />
+
+                    <TextView
+                        android:id="@+id/tvImporteDetalleAnticipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Importe:" />
+
+                    <TextView
+                        android:id="@+id/tvConceptoDetalleAnticipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Concepto:" />
+
+                    <TextView
+                        android:id="@+id/tvObservacionesDetalleAnticipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Observaciones:" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones de acción -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAutorizarAnticipo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="AUTORIZAR"
+            app:backgroundTint="@color/green"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRechazarAnticipo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="RECHAZAR"
+            app:backgroundTint="#F44336"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVolverAnticipo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="VOLVER"
+            app:backgroundTint="@color/grey"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</LinearLayout>
