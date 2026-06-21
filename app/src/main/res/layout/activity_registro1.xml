@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/naranja_fondo"
+    android:background="@drawable/bg_gradient"
     android:orientation="vertical"
     android:padding="24dp"
     tools:context=".Registro1">

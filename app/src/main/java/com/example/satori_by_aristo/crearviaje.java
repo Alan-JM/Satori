@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
 import androidx.fragment.app.Fragment;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -27,7 +31,6 @@ public class crearviaje extends Fragment {
     private ViajeDto viajeEditar;
     private RequestQueue queue;
 
-    // Variables para asegurar el formato SQL
     private String fechaSeleccionada = "";
     private String horaSeleccionada = "";
 
@@ -45,7 +48,6 @@ public class crearviaje extends Fragment {
         tvFolio = v.findViewById(R.id.tvFolioAutollenado);
         spinnerOperadores = v.findViewById(R.id.spinnerOperador);
 
-        // Configurar selectores de fecha y hora
         etFecha.setOnClickListener(view -> mostrarCalendario());
         etHora.setOnClickListener(view -> mostrarReloj());
 
@@ -58,6 +60,7 @@ public class crearviaje extends Fragment {
 
         v.findViewById(R.id.atras).setOnClickListener(view ->
                 getParentFragmentManager().popBackStack());
+
         v.findViewById(R.id.crear).setOnClickListener(view -> guardarViaje());
         return v;
     }
@@ -103,7 +106,6 @@ public class crearviaje extends Fragment {
                                             if (op.optString("telefonoAdmin").equals(miTelefono)) {
                                                 String telP = op.optString("telefonoP");
                                                 String nombreReal = nombresPorTelefono.get(telP);
-
                                                 if (nombreReal != null) {
                                                     listaParaSpinner.add(nombreReal);
                                                     mapaOperadores.put(nombreReal, telP);
@@ -132,11 +134,9 @@ public class crearviaje extends Fragment {
             Toast.makeText(getContext(), "Selecciona fecha y hora", Toast.LENGTH_SHORT).show();
             return;
         }
-
         String url = getString(R.string.base_url) + "viaje";
         int metodo = (viajeEditar == null) ? Request.Method.POST : Request.Method.PUT;
         if (viajeEditar != null) url += "/" + viajeEditar.getFolio();
-
         try {
             JSONObject body = new JSONObject();
             String nombreSel = spinnerOperadores.getSelectedItem().toString();
@@ -147,6 +147,10 @@ public class crearviaje extends Fragment {
             body.put("password", etPass.getText().toString());
             body.put("destino", etDestino.getText().toString());
             body.put("cliente", etCliente.getText().toString());
+
+            // Aquí guardamos el teléfono de la sesión actual en la columna administrador
+            String telefonoSesion = SesionActual.obtenerInstancia().getTelefono();
+            body.put("administrador", telefonoSesion);
 
             JsonObjectRequest request = new JsonObjectRequest(metodo, url, body,
                     response -> {
@@ -163,7 +167,6 @@ public class crearviaje extends Fragment {
     private void cargarDatosEdicion() {
         tvFolio.setText("Folio: " + viajeEditar.getFolio());
         etPass.setText(viajeEditar.getPassword());
-
         if (viajeEditar.getFecha() != null && viajeEditar.getFecha().contains("T")) {
             String[] partes = viajeEditar.getFecha().split("T");
             fechaSeleccionada = partes[0];
@@ -171,11 +174,9 @@ public class crearviaje extends Fragment {
             etFecha.setText(fechaSeleccionada);
             etHora.setText(horaSeleccionada);
         }
-
         if (viajeEditar.getDestino() != null) {
             etDestino.setText(viajeEditar.getDestino());
         }
-
         if (viajeEditar.getCliente() != null) {
             etCliente.setText(viajeEditar.getCliente());
         }

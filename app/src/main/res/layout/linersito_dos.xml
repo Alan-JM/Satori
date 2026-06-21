@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://android.com"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:gravity="center_vertical"
-        android:background="@android:color/white">
+        android:background="@android:color/transparent">
 
         <!-- Sección Izquierda: Folio y Contra -->
         <LinearLayout
@@ -47,7 +46,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:gravity="center"
             android:orientation="vertical"
             android:paddingHorizontal="4dp">
 
@@ -66,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:text="25/10/2024 14:30"
                 android:textColor="@color/black"
-                android:gravity="center"
                 android:textSize="13sp"
                 android:fontFamily="sans-serif-medium" />
         </LinearLayout>
@@ -74,22 +71,26 @@
         <!-- Sección Derecha: Iconos -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="top"> <!-- alineados arriba -->
 
             <ImageView
                 android:id="@+id/imgEnviadoOp"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginEnd="6dp"
-                android:src="@drawable/triangulor" />
+                android:src="@drawable/triangulor"
+                app:tint="@color/naranja_boton"
+                android:layout_gravity="top"/>
 
             <ImageView
                 android:id="@+id/imgProgresoOp"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/triangulo" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/triangulo"
+                app:tint="@color/blue"
+                android:layout_gravity="top"/>
         </LinearLayout>
 
     </LinearLayout>

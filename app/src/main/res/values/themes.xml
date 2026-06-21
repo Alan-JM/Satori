@@ -8,6 +8,12 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/grey</item>
         <item name="colorOnSecondary">@color/black</item>
+
+        <!-- SOLUCIÓN: Control de barras del sistema y Action Bar -->
+        <item name="android:statusBarColor">@color/orange_dark</item> <!-- Color de la barra de la hora/batería -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item> <!-- Fuerza al sistema a respetar los límites -->
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
     </style>
 
     <!-- Variante sin ActionBar (para usar tu MaterialToolbar) -->

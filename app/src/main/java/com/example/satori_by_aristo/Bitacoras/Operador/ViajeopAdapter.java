@@ -74,11 +74,11 @@ public class ViajeopAdapter extends ArrayAdapter<ViajeDto> {
             if (viaje.getIniciado() != null) {
                 switch (viaje.getIniciado()) {
                     case 1:
-                        // Iniciado etapa 1
+                        // Iniciado
                         imgProgreso.setImageResource(R.drawable.triangulo);
                         break;
                     case 2:
-                        // Iniciado etapa 2 (completado/en camino)
+                        // Iniciado
                         imgProgreso.setImageResource(R.drawable.doblecirculo);
                         break;
                     case 3:

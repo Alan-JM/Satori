@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -34,6 +35,9 @@ public class BitacoraFragment extends Fragment
     public static List<Bitacora> bitacorasRegistradas = new ArrayList<>();
     public static int nextId = 1;
 
+    private Switch switchVerBitacorasOperador;
+    private boolean mostrarAceptadas = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,12 +45,10 @@ public class BitacoraFragment extends Fragment
 
         listView = view.findViewById(R.id.bitacorasRegistradas);
         btnRegistrar = view.findViewById(R.id.RegistrarBitacora);
+        switchVerBitacorasOperador = view.findViewById(R.id.switchVerBitacorasOperador);
 
         adapter = new BitacoraAdapter(requireContext(), bitacorasRegistradas);
         listView.setAdapter(adapter);
-
-
-        //aca esta
 
         btnRegistrar.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ContrasenaViaje.class);
@@ -58,6 +60,17 @@ public class BitacoraFragment extends Fragment
                 Bitacora bitacora = bitacorasRegistradas.get(position);
                 mostrarFragmentAcciones(bitacora);
             }
+        });
+
+        // Configuración del switch
+        switchVerBitacorasOperador.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mostrarAceptadas = isChecked;
+            if (isChecked) {
+                switchVerBitacorasOperador.setThumbResource(R.drawable.ic_ve);   // ojo abierto
+            } else {
+                switchVerBitacorasOperador.setThumbResource(R.drawable.ic_nove); // ojo tachado
+            }
+            cargarBitacorasDesdeServidor();
         });
 
         return view;
@@ -101,7 +114,6 @@ public class BitacoraFragment extends Fragment
     public void onEnviar(Bitacora bitacora) {
         int confirmacion = bitacora.getConfirmacion();
 
-
         if ((confirmacion == 0 || confirmacion == 1 || confirmacion == 4) && "gris".equals(bitacora.getColor())) {
             BitacoraApi api = ApiClient.getBitacoraApi(requireContext());
 
@@ -136,6 +148,7 @@ public class BitacoraFragment extends Fragment
             Toast.makeText(requireContext(), "Esta bitácora no está en estado válido para enviar", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     public void onEliminar(Bitacora bitacora) {
         if ("gris".equals(bitacora.getColor())) {
@@ -162,44 +175,20 @@ public class BitacoraFragment extends Fragment
                     bitacorasRegistradas.clear();
 
                     String telefonoSesion = SesionUsuario.getTelefonoP();
-
-                    // 🔹 Mostrar el valor de telefonoP en un Toast
                     Toast.makeText(requireContext(), "TelefonoP en sesión: " + telefonoSesion, Toast.LENGTH_LONG).show();
 
                     for (BitacoraDto dto : response.body()) {
                         if (dto.getTelefono() != null && dto.getTelefono().equals(telefonoSesion)) {
-                            Bitacora b = new Bitacora();
-                            b.setId(dto.getIdFolio());
-                            b.setFecha(dto.getFecha().toString());
-                            b.setOperador(dto.getOperador());
-                            b.setEco(dto.getUnidadEco());
-                            b.setCliente(dto.getCliente());
-                            b.setDestino(dto.getDestino());
-                            b.setAyudantes(dto.getAyudantes());
+                            int confirmacion = dto.getConfirmacion() != null ? dto.getConfirmacion() : 0;
 
-                            b.setOdometroInicial(dto.getOdometroInicial());
-                            b.setOdometroFinal(dto.getOdometroFinal());
-                            b.setDistanciaTotal(dto.getDistanciaTotal());
-
-                            b.setCombustibleConsumido(dto.getCombustibleConsumido() != null ? dto.getCombustibleConsumido().doubleValue() : 0.0);
-                            b.setCombustibleTarjeta(dto.getGastoTCombustible() != null ? dto.getGastoTCombustible().doubleValue() : 0.0);
-                            b.setCasetasTarjeta(dto.getGastoTCasetas() != null ? dto.getGastoTCasetas().doubleValue() : 0.0);
-                            b.setSubtotalTarjeta(dto.getSubTotalT() != null ? dto.getSubTotalT().doubleValue() : 0.0);
-
-                            b.setCombustibleEfectivo(dto.getGastoECombustible() != null ? dto.getGastoECombustible().doubleValue() : 0.0);
-                            b.setCasetasEfectivo(dto.getGastoECasetas() != null ? dto.getGastoECasetas().doubleValue() : 0.0);
-                            b.setComida(dto.getGastoEComida() != null ? dto.getGastoEComida().doubleValue() : 0.0);
-                            b.setReparaciones(dto.getGastoEReparaciones() != null ? dto.getGastoEReparaciones().doubleValue() : 0.0);
-                            b.setManiobras(dto.getGastoEManiobras() != null ? dto.getGastoEManiobras().doubleValue() : 0.0);
-                            b.setTransitosFederal(dto.getGastoETransito() != null ? dto.getGastoETransito().doubleValue() : 0.0);
-                            b.setOtros(dto.getGastoEOtros() != null ? dto.getGastoEOtros().doubleValue() : 0.0);
-                            b.setSubtotalEfectivo(dto.getSubTotalE() != null ? dto.getSubTotalE().doubleValue() : 0.0);
-
-                            b.setGranTotal(dto.getGranTotal() != null ? dto.getGranTotal().doubleValue() : 0.0);
-                            b.setConfirmacion(dto.getConfirmacion() != null ? dto.getConfirmacion() : 0);
-
-
-                            bitacorasRegistradas.add(b);
+                            // Switch apagado → mostrar confirmacion 1, 2 o 4
+                            if (!mostrarAceptadas && (confirmacion == 1 || confirmacion == 2 || confirmacion == 4)) {
+                                bitacorasRegistradas.add(convertirDto(dto));
+                            }
+                            // Switch encendido → mostrar solo confirmacion 3
+                            else if (mostrarAceptadas && confirmacion == 3) {
+                                bitacorasRegistradas.add(convertirDto(dto));
+                            }
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -213,6 +202,39 @@ public class BitacoraFragment extends Fragment
                 Toast.makeText(requireContext(), "Fallo de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private Bitacora convertirDto(BitacoraDto dto) {
+        Bitacora b = new Bitacora();
+        b.setId(dto.getIdFolio());
+        b.setFecha(dto.getFecha().toString());
+        b.setOperador(dto.getOperador());
+        b.setEco(dto.getUnidadEco());
+        b.setCliente(dto.getCliente());
+        b.setDestino(dto.getDestino());
+        b.setAyudantes(dto.getAyudantes());
+        b.setOdometroInicial(dto.getOdometroInicial());
+        b.setOdometroFinal(dto.getOdometroFinal());
+        b.setDistanciaTotal(dto.getDistanciaTotal());
+
+        b.setCombustibleConsumido(dto.getCombustibleConsumido() != null ? dto.getCombustibleConsumido().doubleValue() : 0.0);
+        b.setCombustibleTarjeta(dto.getGastoTCombustible() != null ? dto.getGastoTCombustible().doubleValue() : 0.0);
+        b.setCasetasTarjeta(dto.getGastoTCasetas() != null ? dto.getGastoTCasetas().doubleValue() : 0.0);
+        b.setSubtotalTarjeta(dto.getSubTotalT() != null ? dto.getSubTotalT().doubleValue() : 0.0);
+
+        b.setCombustibleEfectivo(dto.getGastoECombustible() != null ? dto.getGastoECombustible().doubleValue() : 0.0);
+        b.setCasetasEfectivo(dto.getGastoECasetas() != null ? dto.getGastoECasetas().doubleValue() : 0.0);
+        b.setComida(dto.getGastoEComida() != null ? dto.getGastoEComida().doubleValue() : 0.0);
+        b.setReparaciones(dto.getGastoEReparaciones() != null ? dto.getGastoEReparaciones().doubleValue() : 0.0);
+        b.setManiobras(dto.getGastoEManiobras() != null ? dto.getGastoEManiobras().doubleValue() : 0.0);
+        b.setTransitosFederal(dto.getGastoETransito() != null ? dto.getGastoETransito().doubleValue() : 0.0);
+        b.setOtros(dto.getGastoEOtros() != null ? dto.getGastoEOtros().doubleValue() : 0.0);
+        b.setSubtotalEfectivo(dto.getSubTotalE() != null ? dto.getSubTotalE().doubleValue() : 0.0);
+
+        b.setGranTotal(dto.getGranTotal() != null ? dto.getGranTotal().doubleValue() : 0.0);
+        b.setConfirmacion(dto.getConfirmacion() != null ? dto.getConfirmacion() : 0);
+
+        return b;
     }
 
     @Override

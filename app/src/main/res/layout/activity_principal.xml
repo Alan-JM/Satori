@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="start"
-
     tools:context=".Principal"
-    android:background="@color/naranja_fondo">
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/bg_gradient"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/top_app_bar"
@@ -21,21 +22,22 @@
             android:layout_height="wrap_content"
             android:background="@color/orange"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-            app:title="@string/app_name" />
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white"
+            app:contentInsetStartWithNavigation="0dp" />
+
+
 
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="16dp"
-            />
-
+            android:padding="16dp" />
 
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -31,13 +32,15 @@ public class BitacoraAdminFragment extends Fragment
     private BitacoraAdapter adapter;
     private List<Bitacora> bitacorasFiltradas = new ArrayList<>();
 
+    private Switch switchVerBitacoras;
+    private boolean mostrarProcesadas = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bitacora_admin, container, false);
 
         listView = view.findViewById(R.id.bitacorasAdminRegistradas);
-
         adapter = new BitacoraAdapter(getContext(), bitacorasFiltradas);
         listView.setAdapter(adapter);
 
@@ -46,7 +49,18 @@ public class BitacoraAdminFragment extends Fragment
             mostrarFragmentAcciones(bitacora);
         });
 
-         String telefonoSesionAdmin = SesionAdmin.getTelefonoAdmin();
+        switchVerBitacoras = view.findViewById(R.id.switchVerBitacoras);
+        switchVerBitacoras.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mostrarProcesadas = isChecked;
+            if (isChecked) {
+                switchVerBitacoras.setThumbResource(R.drawable.ic_ve);   // ojo abierto
+            } else {
+                switchVerBitacoras.setThumbResource(R.drawable.ic_nove); // ojo tachado
+            }
+            cargarBitacorasDesdeServidor();
+        });
+
+        String telefonoSesionAdmin = SesionAdmin.getTelefonoAdmin();
         Toast.makeText(requireContext(),
                 "Teléfono admin en sesión: " + telefonoSesionAdmin,
                 Toast.LENGTH_LONG).show();
@@ -56,7 +70,6 @@ public class BitacoraAdminFragment extends Fragment
 
     private void cargarBitacorasDesdeServidor() {
         BitacoraApi api = ApiClient.getBitacoraApi(requireContext());
-
         String telefonoSesionAdmin = SesionAdmin.getTelefonoAdmin();
 
         api.getAllBitacoras().enqueue(new Callback<List<BitacoraDto>>() {
@@ -66,24 +79,22 @@ public class BitacoraAdminFragment extends Fragment
                     bitacorasFiltradas.clear();
 
                     for (BitacoraDto dto : response.body()) {
-                        // 🔹 Solo bitácoras confirmadas (2) y del admin en sesión
-                        if (dto.getConfirmacion() != null && dto.getConfirmacion() == 2 &&
-                                dto.getTelefonoAdmin() != null &&
+                        if (dto.getTelefonoAdmin() != null &&
                                 dto.getTelefonoAdmin().equals(telefonoSesionAdmin)) {
 
-                            Bitacora b = new Bitacora();
-                            b.setId(dto.getIdFolio());
-                            b.setFecha(dto.getFecha().toString());
-                            b.setOperador(dto.getOperador());
-                            b.setEco(dto.getUnidadEco());
-                            b.setCliente(dto.getCliente());
-                            b.setDestino(dto.getDestino());
-                            b.setConfirmacion(dto.getConfirmacion());
+                            Integer confirmacion = dto.getConfirmacion();
 
-                            bitacorasFiltradas.add(b);
+                            // Switch apagado → pendientes (confirmacion == 2)
+                            if (!mostrarProcesadas && confirmacion != null && confirmacion == 2) {
+                                bitacorasFiltradas.add(convertirDto(dto));
+                            }
+                            // Switch encendido → autorizadas (3) y rechazadas (4)
+                            else if (mostrarProcesadas && confirmacion != null &&
+                                    (confirmacion == 3 || confirmacion == 4)) {
+                                bitacorasFiltradas.add(convertirDto(dto));
+                            }
                         }
                     }
-
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -95,6 +106,18 @@ public class BitacoraAdminFragment extends Fragment
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private Bitacora convertirDto(BitacoraDto dto) {
+        Bitacora b = new Bitacora();
+        b.setId(dto.getIdFolio());
+        b.setFecha(dto.getFecha() != null ? dto.getFecha().toString() : "");
+        b.setOperador(dto.getOperador());
+        b.setEco(dto.getUnidadEco());
+        b.setCliente(dto.getCliente());
+        b.setDestino(dto.getDestino());
+        b.setConfirmacion(dto.getConfirmacion());
+        return b;
     }
 
     private void mostrarFragmentAcciones(Bitacora bitacora) {
@@ -110,14 +133,14 @@ public class BitacoraAdminFragment extends Fragment
 
     @Override
     public void onAutorizar(Bitacora bitacora) {
-        bitacora.setConfirmacion(3); // ejemplo: 3 = autorizado
+        bitacora.setConfirmacion(3); // autorizado
         adapter.notifyDataSetChanged();
         getParentFragmentManager().popBackStack();
     }
 
     @Override
     public void onRechazar(Bitacora bitacora, String motivo) {
-        bitacora.setConfirmacion(4); // ejemplo: 4 = rechazado
+        bitacora.setConfirmacion(4); // rechazado
         bitacora.setMotivoRechazo(motivo);
         adapter.notifyDataSetChanged();
         getParentFragmentManager().popBackStack();
@@ -125,7 +148,7 @@ public class BitacoraAdminFragment extends Fragment
 
     @Override
     public void onDesautorizar(Bitacora bitacora) {
-        bitacora.setConfirmacion(2); // vuelve a estado pendiente admin
+        bitacora.setConfirmacion(2); // vuelve a pendiente
         adapter.notifyDataSetChanged();
         getParentFragmentManager().popBackStack();
     }

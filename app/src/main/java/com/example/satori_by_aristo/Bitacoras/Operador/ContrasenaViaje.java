@@ -31,11 +31,9 @@ public class ContrasenaViaje extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_contrasena_viaje);
 
-        // Tomar la URL desde strings.xml
-        BASE_URL = getString(R.string.base_url) + "viaje";
+         BASE_URL = getString(R.string.base_url) + "viaje";
 
-        // Mostrar carrusel al inicio
-        getSupportFragmentManager()
+         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.contenedorCarrusel, new CarruselFragment())
                 .commit();
@@ -73,13 +71,18 @@ public class ContrasenaViaje extends AppCompatActivity {
                 JSONObject obj = viajes.getJSONObject(i);
                 String folioApi = obj.getString("folio");
                 String passApi = obj.getString("password");
+                int iniciadoApi = obj.getInt("iniciado");
 
                 if (folio.equals(folioApi) && password.equals(passApi)) {
-                    // Coincide - pasar a NuevaBitacora1 con variable "iniciado"
-                    Intent intent = new Intent(this, NuevaBitacora1.class);
-                    intent.putExtra("iniciado", folio); // viaje = folio
-                    startActivity(intent);
-                    finish();
+                     if (iniciadoApi != 2) {
+                         Intent intent = new Intent(this, NuevaBitacora1.class);
+                        intent.putExtra("iniciado", folio);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Ya iniciado=2 -> mostrar mensaje
+                        Toast.makeText(this, "La bitácora ya ha sido creada", Toast.LENGTH_SHORT).show();
+                    }
                     return;
                 }
             }
@@ -88,4 +91,5 @@ public class ContrasenaViaje extends AppCompatActivity {
             Toast.makeText(this, "Error procesando datos", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

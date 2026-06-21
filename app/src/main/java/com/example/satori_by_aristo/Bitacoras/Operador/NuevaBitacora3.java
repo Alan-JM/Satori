@@ -231,14 +231,21 @@ public class NuevaBitacora3 extends AppCompatActivity {
                     BitacoraDto savedDto = response.body();
                     Toast.makeText(NuevaBitacora3.this, "Bitácora guardada", Toast.LENGTH_SHORT).show();
 
-                    // 🔹 Actualizar anticipos seleccionados con el folio de la bitácora recién creada
-                    if (savedDto.getIdFolio() != null) {
+                     if (savedDto.getIdFolio() != null) {
                         actualizarAnticipos(savedDto.getIdFolio());
                     } else {
                         Log.w("BitacoraSave", "El DTO guardado no devolvió idFolio");
                     }
 
-                    actualizarViajeIniciado();
+                     if (iniciado != null && !iniciado.trim().isEmpty()) {
+                        try {
+                            int idViaje = Integer.parseInt(iniciado.trim());
+                            actualizarViajeIniciadoVolley(idViaje); // aquí usamos Volley
+                        } catch (NumberFormatException e) {
+                            Log.e("ViajeUpdate", "Error convirtiendo 'iniciado': " + iniciado, e);
+                        }
+                    }
+
                     goToPrincipal();
                 } else {
                     Toast.makeText(NuevaBitacora3.this,
@@ -263,6 +270,7 @@ public class NuevaBitacora3 extends AppCompatActivity {
             }
         });
     }
+
 
     private void actualizarBitacora() {
         BitacoraDto dto = buildBitacoraDto();
@@ -423,6 +431,35 @@ public class NuevaBitacora3 extends AppCompatActivity {
             Log.w("ViajeUpdate", "No se actualizó viaje porque 'iniciado' está vacío");
         }
     }
+    private void actualizarViajeIniciadoVolley(int idViaje) {
+        String url = getString(R.string.base_url) + "viaje/" + idViaje + "/iniciado";
+
+        try {
+            JSONObject body = new JSONObject();
+            body.put("iniciado", 2);
+
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.PATCH,
+                    url,
+                    body,
+                    response -> {
+                        Log.d("ViajeUpdate", "Viaje " + idViaje + " actualizado a iniciado=2");
+                        Toast.makeText(this, "Viaje marcado como iniciado", Toast.LENGTH_SHORT).show();
+                    },
+                    error -> {
+                        Log.e("ViajeUpdate", "Error actualizando viaje: " + error.toString());
+                        Toast.makeText(this, "Error actualizando viaje", Toast.LENGTH_SHORT).show();
+                    }
+            );
+
+            Volley.newRequestQueue(this).add(request);
+
+        } catch (Exception e) {
+            Log.e("ViajeUpdate", "Error creando JSON", e);
+        }
+    }
+
+
 
 
     private void goToPrincipal() {

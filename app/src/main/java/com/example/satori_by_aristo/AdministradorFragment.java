@@ -30,22 +30,21 @@ public class AdministradorFragment extends Fragment implements ViajesAdapter.OnV
     private RequestQueue queue;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Layout que contiene el ListView y el botón de crear
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_administrador, container, false);
 
         listaViajes = view.findViewById(R.id.listaOperadores);
         queue = Volley.newRequestQueue(requireContext());
 
-        // Cargar los viajes desde el servidor al iniciar
+        // Cargar los viajes filtrados por el administrador de la sesión
         cargarViajes();
 
-        // Botón para ir al formulario de creación
         View btnNuevo = view.findViewById(R.id.btnCrearViaje);
         if (btnNuevo != null) {
             btnNuevo.setOnClickListener(v -> {
                 getParentFragmentManager().beginTransaction()
-                        .replace(R.id.content_frame, new crearviaje()) // Usando content_frame de Principal.java
+                        .replace(R.id.content_frame, new crearviaje())
                         .addToBackStack(null)
                         .commit();
             });
@@ -55,7 +54,10 @@ public class AdministradorFragment extends Fragment implements ViajesAdapter.OnV
     }
 
     private void cargarViajes() {
-        String url = getString(R.string.base_url) + "viaje";
+        // Obtener el teléfono de la sesión actual
+        String telefonoSesion = SesionActual.obtenerInstancia().getTelefono();
+        // Usar el endpoint filtrado por administrador
+        String url = getString(R.string.base_url) + "viaje/administrador/" + telefonoSesion;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
@@ -71,11 +73,13 @@ public class AdministradorFragment extends Fragment implements ViajesAdapter.OnV
                             viaje.setIniciado(obj.optInt("iniciado"));
                             viaje.setFecha(obj.optString("fecha"));
                             viaje.setPassword(obj.optString("password"));
+                            viaje.setDestino(obj.optString("destino"));
+                            viaje.setCliente(obj.optString("cliente"));
+                            viaje.setAdministrador(obj.optString("administrador"));
 
                             listaData.add(viaje);
                         }
 
-                        // Configurar el adapter con la interfaz de acciones
                         adapter = new ViajesAdapter(requireContext(), listaData, this);
                         listaViajes.setAdapter(adapter);
 
@@ -84,25 +88,18 @@ public class AdministradorFragment extends Fragment implements ViajesAdapter.OnV
                         Toast.makeText(getContext(), "Error en el formato de datos", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> {
-                    Toast.makeText(getContext(), "Error de red: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                error -> Toast.makeText(getContext(), "Error de red: " + error.getMessage(), Toast.LENGTH_SHORT).show()
         );
-
         queue.add(request);
     }
-
 
     @Override
     public void onEdit(ViajeDto viaje) {
         if (viaje.getEnviado() != null && viaje.getEnviado() == 2) {
-            Toast.makeText(getContext(),
-                    "No se puede editar un viaje ya enviado",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No se puede editar un viaje ya enviado", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Si no está enviado, permitir edición
         crearviaje fragment = new crearviaje();
         Bundle bundle = new Bundle();
         bundle.putSerializable("viaje", viaje);
@@ -114,10 +111,8 @@ public class AdministradorFragment extends Fragment implements ViajesAdapter.OnV
                 .commit();
     }
 
-
     @Override
     public void onStatusChanged() {
-        // Se ejecuta cuando el adapter borra un registro o actualiza el estado "enviado"
         cargarViajes();
     }
 }

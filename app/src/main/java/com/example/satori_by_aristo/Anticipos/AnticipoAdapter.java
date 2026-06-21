@@ -2,11 +2,11 @@ package com.example.satori_by_aristo.Anticipos;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.satori_by_aristo.R;
@@ -29,43 +29,42 @@ public class AnticipoAdapter extends ArrayAdapter<Anticipo> {
                     .inflate(R.layout.anticipo_item, parent, false);
         }
 
+         LinearLayout cardBackgroundLayout = convertView.findViewById(R.id.cardBackgroundLayout);
+
         TextView tvFolio = convertView.findViewById(R.id.tvFolioAnticipo);
         TextView tvUnidadOperador = convertView.findViewById(R.id.tvOperadorAnticipo);
         TextView tvImporte = convertView.findViewById(R.id.tvImporteAnticipo);
 
         if (anticipo != null) {
-            // 🔹 Mostrar idFolio
-            tvFolio.setText("Folio: " + anticipo.getIdFolio());
+             tvFolio.setText("Folio: " + anticipo.getIdFolio());
 
-            // 🔹 Mostrar unidadTrans y operador
-            tvUnidadOperador.setText("Unidad: " + anticipo.getUnidadTrans()
+             tvUnidadOperador.setText("Unidad: " + anticipo.getUnidadTrans()
                     + " - Operador: " + anticipo.getOperador());
 
-            // 🔹 Mostrar importe
-            tvImporte.setText(String.format("$%.2f", anticipo.getImporte()));
+             tvImporte.setText(String.format("$%.2f", anticipo.getImporte()));
 
-            // 🔹 Color de fondo según confirmación usando ifs
-            if (anticipo.getConfirmacion() != null) {
+             if (anticipo.getConfirmacion() != null) {
                 if (anticipo.getConfirmacion() == 0) {
-                    convertView.setBackgroundColor(Color.parseColor("#9E9E9E")); // Gris = creado
+                    cardBackgroundLayout.setBackgroundResource(R.drawable.border_neon_gray);    // Gris = creado
                 } else if (anticipo.getConfirmacion() == 1) {
-                    convertView.setBackgroundColor(Color.parseColor("#FFEB3B")); // Amarillo = enviado
+                    cardBackgroundLayout.setBackgroundResource(R.drawable.border_neon_yellow);  // Amarillo = enviado
                 } else if (anticipo.getConfirmacion() == 2) {
-                    convertView.setBackgroundColor(Color.parseColor("#4CAF50")); // Verde = autorizado
+                    cardBackgroundLayout.setBackgroundResource(R.drawable.border_neon_green);   // Verde = autorizado
                 } else if (anticipo.getConfirmacion() == 3) {
-                    convertView.setBackgroundColor(Color.parseColor("#F44336")); // Rojo = rechazado
+                    cardBackgroundLayout.setBackgroundResource(R.drawable.border_neon_red);     // Rojo = rechazado
                 } else {
-                    convertView.setBackgroundColor(Color.TRANSPARENT); // Default
+                    cardBackgroundLayout.setBackgroundResource(R.drawable.border_neon_gray);    // Default
                 }
             } else {
-                convertView.setBackgroundColor(Color.TRANSPARENT); // Sin estado
+                cardBackgroundLayout.setBackgroundResource(R.drawable.border_neon_gray);        // Sin estado
             }
         } else {
-            // Si el anticipo es null, limpiar vista
-            tvFolio.setText("");
+             tvFolio.setText("");
             tvUnidadOperador.setText("");
             tvImporte.setText("");
-            convertView.setBackgroundColor(Color.TRANSPARENT);
+            if (cardBackgroundLayout != null) {
+                cardBackgroundLayout.setBackgroundResource(R.drawable.border_neon_gray);
+            }
         }
 
         return convertView;

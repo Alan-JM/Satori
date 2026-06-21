@@ -3,7 +3,7 @@
     android:id="@+id/mainViajes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/naranja_fondo"
+    android:background="@drawable/bg_gradient"
     android:padding="16dp">
 
     <!-- Título -->
@@ -23,11 +23,17 @@
         android:id="@+id/listaOperadores"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/blanco_hueso"
-        android:dividerHeight="4dp"
         android:layout_below="@id/tituloViajes"
         android:layout_above="@id/btnCrearViaje"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:padding="12dp"
+        android:clipToPadding="false"
+      />
+
+
+
 
     <!-- Botón ayuda circular -->
     <ImageButton

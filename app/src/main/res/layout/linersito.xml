@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linersito"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,8 +7,9 @@
     android:weightSum="1"
     android:padding="12dp"
     android:gravity="center_vertical"
-    android:background="@color/blanco_hueso"
-    android:layout_marginBottom="8dp">
+    android:background="@drawable/bg_item_redondeado"
+    android:layout_marginBottom="12dp"
+    android:elevation="4dp">
 
     <!-- Nombre del operador -->
     <TextView
@@ -20,44 +21,44 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/negro_suave"
-        android:paddingEnd="6dp"/>
+        android:paddingEnd="6dp" />
 
     <!-- Icono enviado -->
     <ImageView
         android:id="@+id/enviado"
         android:layout_width="0dp"
-        android:layout_height="24dp"
+        android:layout_height="28dp"
         android:layout_weight="0.125"
         android:src="@drawable/doblecirculo"
-        android:tint="@color/naranja_boton"
-        android:layout_marginEnd="4dp"/>
+        android:layout_marginEnd="6dp"
+        app:tint="@color/naranja_boton" />
 
     <!-- Icono en progreso -->
     <ImageView
         android:id="@+id/oprogreso"
         android:layout_width="0dp"
-        android:layout_height="24dp"
+        android:layout_height="28dp"
         android:layout_weight="0.125"
         android:src="@drawable/triangulor"
-        android:tint="@color/naranja_boton"
-        android:layout_marginEnd="4dp"/>
+        android:layout_marginEnd="6dp"
+        app:tint="@color/naranja_boton" />
 
     <!-- Icono lápiz -->
     <ImageView
         android:id="@+id/lapiz"
         android:layout_width="0dp"
-        android:layout_height="24dp"
+        android:layout_height="28dp"
         android:layout_weight="0.125"
         android:src="@drawable/lapiz"
-        android:tint="@color/negro_suave"
-        android:layout_marginEnd="4dp"/>
+        android:layout_marginEnd="6dp"
+        app:tint="@color/negro_suave" />
 
     <!-- Icono bote -->
     <ImageView
         android:id="@+id/bote"
         android:layout_width="0dp"
-        android:layout_height="24dp"
+        android:layout_height="28dp"
         android:layout_weight="0.125"
         android:src="@drawable/bote"
-        android:tint="@color/negro_suave"/>
+        app:tint="@color/negro_suave" />
 </LinearLayout>

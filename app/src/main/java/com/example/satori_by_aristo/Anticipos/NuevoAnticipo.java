@@ -28,7 +28,8 @@ public class NuevoAnticipo extends AppCompatActivity {
     private MaterialButton btnAtras, btnGuardar;
 
     private boolean modoEdicion = false;
-    private String anticipoIdFolio = null;
+    private int anticipoIdFolio = -1;
+    private Integer confirmacionPrevia = null;
 
     private String BASE_URL;
 
@@ -38,11 +39,10 @@ public class NuevoAnticipo extends AppCompatActivity {
         setContentView(R.layout.activity_nuevo_anticipo);
 
         BASE_URL = getString(R.string.base_url);
-
         inicializarVistas();
 
-        anticipoIdFolio = getIntent().getStringExtra("anticipo_idFolio");
-        modoEdicion = anticipoIdFolio != null;
+        anticipoIdFolio = getIntent().getIntExtra("anticipo_idFolio", -1);
+        modoEdicion = anticipoIdFolio != -1;
 
         if (modoEdicion) {
             cargarDatosParaEditar();
@@ -80,9 +80,7 @@ public class NuevoAnticipo extends AppCompatActivity {
         if (nombreUsuario != null) {
             etOperador.setText(nombreUsuario);
         }
-
-        String fechaActual = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                .format(new Date());
+        String fechaActual = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         etFecha.setText(fechaActual);
     }
 
@@ -103,6 +101,7 @@ public class NuevoAnticipo extends AppCompatActivity {
                         etImporte.setText(String.valueOf(response.getDouble("importe")));
                         etConcepto.setText(response.getString("concepto"));
                         etObservaciones.setText(response.getString("observaciones"));
+                        confirmacionPrevia = response.optInt("confirmacion", 0);
                     } catch (JSONException e) {
                         Toast.makeText(this, "Error parseando datos", Toast.LENGTH_SHORT).show();
                     }
@@ -125,11 +124,9 @@ public class NuevoAnticipo extends AppCompatActivity {
             anticipoJson.put("concepto", etConcepto.getText().toString().trim());
             anticipoJson.put("observaciones", etObservaciones.getText().toString().trim());
             anticipoJson.put("confirmacion", 0);
-
             anticipoJson.put("telefonoAdmin", SesionUsuario.getTelefonoAdmin());
             anticipoJson.put("telefono", SesionUsuario.getTelefonoAdmin());
             anticipoJson.put("telefonop", SesionActual.obtenerInstancia().getTelefono());
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -151,38 +148,57 @@ public class NuevoAnticipo extends AppCompatActivity {
     private void actualizarAnticipo() {
         if (!validarCampos()) return;
 
+        double importe;
+        try {
+            importe = Double.parseDouble(etImporte.getText().toString().trim());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "El importe no es un número válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (anticipoIdFolio == -1) {
+            Toast.makeText(this, "Error: ID de anticipo no válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String url = BASE_URL + "anticipo/" + anticipoIdFolio;
         JSONObject anticipoJson = new JSONObject();
+
         try {
             anticipoJson.put("idFolio", anticipoIdFolio);
             anticipoJson.put("fecha", etFecha.getText().toString().trim());
             anticipoJson.put("unidadTrans", etUnidadTrans.getText().toString().trim());
             anticipoJson.put("operador", etOperador.getText().toString().trim());
-            anticipoJson.put("importe", Double.parseDouble(etImporte.getText().toString().trim()));
+            anticipoJson.put("importe", importe);
             anticipoJson.put("concepto", etConcepto.getText().toString().trim());
             anticipoJson.put("observaciones", etObservaciones.getText().toString().trim());
-            anticipoJson.put("confirmacion", 0);
-
+            anticipoJson.put("confirmacion", confirmacionPrevia);
             anticipoJson.put("telefonoAdmin", SesionUsuario.getTelefonoAdmin());
             anticipoJson.put("telefono", SesionUsuario.getTelefonoAdmin());
             anticipoJson.put("telefonop", SesionActual.obtenerInstancia().getTelefono());
 
+            RequestQueue queue = Volley.newRequestQueue(this);
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.PUT,
+                    url,
+                    anticipoJson,
+                    response -> {
+                        Toast.makeText(this, "Anticipo actualizado correctamente", Toast.LENGTH_SHORT).show();
+                        finish();
+                    },
+                    error -> {
+                        if (error.networkResponse != null) {
+                            android.util.Log.e("VolleyError", "Código de estado: " + error.networkResponse.statusCode);
+                        }
+                        Toast.makeText(this, "Error al actualizar en el servidor", Toast.LENGTH_SHORT).show();
+                    }
+            );
+            queue.add(request);
+
         } catch (JSONException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Error interno al procesar los datos", Toast.LENGTH_SHORT).show();
         }
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                anticipoJson,
-                response -> {
-                    Toast.makeText(this, "Anticipo actualizado en servidor", Toast.LENGTH_SHORT).show();
-                    finish();
-                },
-                error -> Toast.makeText(this, "Error actualizando anticipo", Toast.LENGTH_SHORT).show()
-        );
-        queue.add(request);
     }
 
     private boolean validarCampos() {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -37,6 +38,9 @@ public class AnticiposFragment extends Fragment
     private final List<Anticipo> anticiposRegistrados = new ArrayList<>();
     private String BASE_URL;
 
+    private Switch switchVerAnticipos;
+    private boolean mostrarProcesados = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class AnticiposFragment extends Fragment
 
         listView = view.findViewById(R.id.anticiposRegistrados);
         btnRegistrar = view.findViewById(R.id.RegistrarAnticipo);
+        switchVerAnticipos = view.findViewById(R.id.switchVerAnticipos);
 
         adapter = new AnticipoAdapter(requireContext(), anticiposRegistrados);
         listView.setAdapter(adapter);
@@ -58,6 +63,17 @@ public class AnticiposFragment extends Fragment
         listView.setOnItemClickListener((parent, itemView, position, id) -> {
             Anticipo anticipo = anticiposRegistrados.get(position);
             mostrarFragmentAcciones(anticipo);
+        });
+
+        // Configuración del switch
+        switchVerAnticipos.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mostrarProcesados = isChecked;
+            if (isChecked) {
+                switchVerAnticipos.setThumbResource(R.drawable.ic_ve);   // ojo abierto
+            } else {
+                switchVerAnticipos.setThumbResource(R.drawable.ic_nove); // ojo tachado
+            }
+            cargarAnticiposDesdeServidor();
         });
 
         return view;
@@ -184,25 +200,19 @@ public class AnticiposFragment extends Fragment
                             String telefono = obj.optString("telefono", "");
                             String telefonop = obj.optString("telefonop", "");
 
+                            int confirmacion = obj.optInt("confirmacion", 0);
+
                             if (telefonoSesion != null &&
                                     (telefonoSesion.equals(telefonoAdmin) || telefonoSesion.equals(telefonop))) {
 
-                                int idFolio = obj.optInt("idFolio", -1);
-                                Anticipo anticipo = new Anticipo(
-                                        idFolio,
-                                        obj.optString("fecha", null),
-                                        obj.optString("unidadTrans", null),
-                                        obj.optString("operador", null),
-                                        null,
-                                        obj.optDouble("importe", 0.0),
-                                        obj.optString("concepto", null),
-                                        obj.optString("observaciones", null),
-                                        obj.optInt("confirmacion", 0),
-                                        telefonoAdmin,
-                                        telefono,
-                                        telefonop
-                                );
-                                anticiposRegistrados.add(anticipo);
+                                // Switch apagado → mostrar confirmacion 0 o 1
+                                if (!mostrarProcesados && (confirmacion == 0 || confirmacion == 1)) {
+                                    anticiposRegistrados.add(crearAnticipo(obj, telefonoAdmin, telefono, telefonop, confirmacion));
+                                }
+                                // Switch encendido → mostrar confirmacion 2 o 3
+                                else if (mostrarProcesados && (confirmacion == 2 || confirmacion == 3)) {
+                                    anticiposRegistrados.add(crearAnticipo(obj, telefonoAdmin, telefono, telefonop, confirmacion));
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -214,5 +224,23 @@ public class AnticiposFragment extends Fragment
         );
 
         queue.add(request);
+    }
+
+    private Anticipo crearAnticipo(JSONObject obj, String telefonoAdmin, String telefono, String telefonop, int confirmacion) {
+        int idFolio = obj.optInt("idFolio", -1);
+        return new Anticipo(
+                idFolio,
+                obj.optString("fecha", null),
+                obj.optString("unidadTrans", null),
+                obj.optString("operador", null),
+                null,
+                obj.optDouble("importe", 0.0),
+                obj.optString("concepto", null),
+                obj.optString("observaciones", null),
+                confirmacion,
+                telefonoAdmin,
+                telefono,
+                telefonop
+        );
     }
 }

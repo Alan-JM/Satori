@@ -15,31 +15,28 @@
         android:text="Folio | Fecha"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:fontFamily="sans-serif-medium"/>
 
-    <!-- Cliente - Destino + Resumen en la misma fila -->
-    <LinearLayout
+    <!-- Cliente - Destino -->
+    <TextView
+        android:id="@+id/tvClienteDestino"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="6dp">
+        android:layout_marginTop="6dp"
+        android:text="Cliente - Destino"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"/>
 
-        <TextView
-            android:id="@+id/tvClienteDestino"
-            android:layout_width="151dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cliente - Destino"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvResumen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Resumen generado"
-            android:textSize="13sp"
-            android:textColor="#FF9800"
-            android:layout_marginStart="8dp"/>
-    </LinearLayout>
+    <!-- Resumen generado -->
+    <TextView
+        android:id="@+id/tvResumen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Resumen generado"
+        android:textSize="13sp"
+        android:textColor="#FF9800"
+        android:fontFamily="sans-serif"/>
 </LinearLayout>

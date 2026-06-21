@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 1. CAPA TRASERA: El degradado brillante (Naranja Pastel a Naranja Fuerte) -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FFB380"
+            android:endColor="#FF5500"
+            android:angle="45" />
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+
+    <!-- 2. CAPA DELANTERA: El centro oscuro de la tarjeta -->
+    <item android:top="3dp" android:bottom="3dp" android:left="3dp" android:right="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#121212" /> <!-- Fondo interno oscuro -->
+            <corners android:radius="17dp" />
+        </shape>
+    </item>
+
+</layer-list>

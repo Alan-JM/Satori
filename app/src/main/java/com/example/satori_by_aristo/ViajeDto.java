@@ -12,13 +12,15 @@ public class ViajeDto implements Serializable {
     private String password;
     private String destino;
     private String cliente;
+    private String administrador;
 
-     public ViajeDto() {
+    public ViajeDto() {
     }
 
-    // Constructor con todos los campos (Builder manual)
+
     public ViajeDto(Integer folio, String operador, Integer enviado, Integer iniciado,
-                    String fecha, String password, String destino) {
+                    String fecha, String password, String destino,
+                    String cliente, String administrador) {
         this.folio = folio;
         this.operador = operador;
         this.enviado = enviado;
@@ -27,6 +29,7 @@ public class ViajeDto implements Serializable {
         this.password = password;
         this.destino = destino;
         this.cliente = cliente;
+        this.administrador = administrador;
     }
 
     // Getters y Setters
@@ -54,4 +57,6 @@ public class ViajeDto implements Serializable {
     public String getCliente() { return cliente; }
     public void setCliente(String cliente) { this.cliente = cliente; }
 
+    public String getAdministrador() { return administrador; }
+    public void setAdministrador(String administrador) { this.administrador = administrador; }
 }

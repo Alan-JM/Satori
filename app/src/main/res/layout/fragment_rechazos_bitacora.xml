@@ -3,28 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="24dp"
     tools:context=".Bitacoras.Operador.RechazosBitacora">
 
-     <TextView
+    <TextView
         android:id="@+id/tituloRegistros"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lista de rechazos"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:fontFamily="@font/rob_bold"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="16dp"
+        android:letterSpacing="0.02" />
 
-    <!-- ListView -->
     <ListView
         android:id="@+id/listaRegistros"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/orange_dark"
-        android:dividerHeight="1dp"
-        android:listSelector="@color/orange_light"
-        android:background="@color/grey_dark" />
+        android:background="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="14dp"
+        android:listSelector="@android:color/transparent"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false"
+        android:scrollbars="none" />
 
 </LinearLayout>

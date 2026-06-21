@@ -17,7 +17,7 @@ public class AccionesAnticipoFragment extends Fragment {
 
     private TextView tvFolio, tvFecha, tvUnidadTrans, tvOperador;
     private TextView tvImporte, tvConcepto, tvObservaciones;
-    private MaterialButton btnModificar, btnEnviar, btnVolver;
+    private MaterialButton btnModificar, btnEnviar, btnEliminar, btnVolver;
 
     private OnAccionAnticipoListener listener;
     private Anticipo anticipo;
@@ -25,7 +25,7 @@ public class AccionesAnticipoFragment extends Fragment {
     public interface OnAccionAnticipoListener {
         void onModificar(Anticipo anticipo);
         void onEnviar(Anticipo anticipo);
-        void onEliminar(Anticipo anticipo); // opcional, si quieres mantener eliminar
+        void onEliminar(Anticipo anticipo);
         void onVolver();
     }
 
@@ -60,6 +60,7 @@ public class AccionesAnticipoFragment extends Fragment {
 
         btnModificar = view.findViewById(R.id.btnModificarAnticipo);
         btnEnviar = view.findViewById(R.id.btnEnviarAnticipo);
+        btnEliminar = view.findViewById(R.id.btnEliminarAnticipo);
         btnVolver = view.findViewById(R.id.btnVolverAnticipo);
     }
 
@@ -74,15 +75,14 @@ public class AccionesAnticipoFragment extends Fragment {
         tvConcepto.setText("Concepto: " + anticipo.getConcepto());
         tvObservaciones.setText("Observaciones: " + anticipo.getObservaciones());
 
-        // 🔹 Control de visibilidad según confirmación
         if (anticipo.getConfirmacion() != null && anticipo.getConfirmacion() == 1) {
-            // Ya enviado → no editable ni enviable
             btnModificar.setVisibility(View.GONE);
             btnEnviar.setVisibility(View.GONE);
+            btnEliminar.setVisibility(View.GONE);
         } else {
-            // Creado → editable y enviable
             btnModificar.setVisibility(View.VISIBLE);
             btnEnviar.setVisibility(View.VISIBLE);
+            btnEliminar.setVisibility(View.VISIBLE);
         }
     }
 
@@ -95,12 +95,16 @@ public class AccionesAnticipoFragment extends Fragment {
 
         btnEnviar.setOnClickListener(v -> {
             if (listener != null && anticipo != null && anticipo.getConfirmacion() == 0) {
-                // ✅ Antes de enviar, aseguramos que los teléfonos estén correctos
                 anticipo.setTelefonoAdmin(SesionUsuario.getTelefonoAdmin());
-                anticipo.setTelefono(SesionUsuario.getTelefonoAdmin()); // igualamos al admin
+                anticipo.setTelefono(SesionUsuario.getTelefonoAdmin());
                 anticipo.setTelefonop(SesionActual.obtenerInstancia().getTelefono());
-
                 listener.onEnviar(anticipo);
+            }
+        });
+
+        btnEliminar.setOnClickListener(v -> {
+            if (listener != null && anticipo != null && anticipo.getConfirmacion() == 0) {
+                listener.onEliminar(anticipo);
             }
         });
 
@@ -110,5 +114,4 @@ public class AccionesAnticipoFragment extends Fragment {
             }
         });
     }
-
 }

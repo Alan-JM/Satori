@@ -47,13 +47,13 @@ public class Anticipo {
     public String getTelefonop() { return telefonop; }
 
     public String getColor() {
-        if (confirmacion == null) return "rojo";
+        if (confirmacion == null) return "gris";
         switch (confirmacion) {
-            case 0: return "gris";
+            case 0: return "rojo";
             case 1: return "amarillo";
             case 2: return "verde";
             case 3: return "rojo";
-            default: return "rojo";
+            default: return "gris";
         }
     }
 
