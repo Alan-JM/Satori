@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@drawable/bg_gradient">
 
     <LinearLayout
@@ -10,62 +11,60 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Título Km por viaje -->
+        <!-- SECCIÓN: KM TOTAL -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Km por viaje"
-            android:textStyle="bold"
+            android:text="Km total por operador"
             android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#212121"
             android:layout_marginBottom="8dp"/>
 
-        <!-- Gráfica de barras Km por viaje -->
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chartKmPorViaje"
+            android:id="@+id/chartKm"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
+            android:layout_marginBottom="32dp"
             android:background="@android:color/transparent"
-            android:layout_marginBottom="24dp"/>
+            android:padding="8dp"/>
 
-        <!-- Título Gasto por viaje -->
+        <!-- SECCIÓN: GASTO TOTAL -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Gasto por viaje"
-            android:textStyle="bold"
+            android:text="Gasto total por operador"
             android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#212121"
             android:layout_marginBottom="8dp"/>
 
-        <!-- Gráfica de barras Gasto por viaje -->
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chartGastoPorViaje"
+            android:id="@+id/chartGasto"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
+            android:layout_marginBottom="32dp"
             android:background="@android:color/transparent"
-            android:layout_marginBottom="24dp"/>
+            android:padding="8dp"/>
 
-        <!-- Título No. de viajes por tipo -->
+        <!-- SECCIÓN: VIAJES REALIZADOS -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No. de viajes por tipo"
-            android:textStyle="bold"
+            android:text="Viajes realizados"
             android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#212121"
             android:layout_marginBottom="8dp"/>
 
-        <!-- Gráfica de pastel -->
         <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chartViajesPorTipo"
+            android:id="@+id/chartPieGeneral"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
+
+            android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
-            android:layout_marginBottom="24dp"/>
+            android:padding="8dp"/>
 
     </LinearLayout>
 </ScrollView>

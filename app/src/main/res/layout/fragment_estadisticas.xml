@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="12dp">
 
-        <ListView
-            android:id="@+id/listaOperadores"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <FrameLayout
-            android:id="@+id/contenedorDetalle"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnGeneral"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"/>
+            android:text="General"/>
+
+        <Button
+            android:id="@+id/btnPersonal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal"
+            android:layout_marginStart="16dp"/>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/contenedorDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"/>
 
 </LinearLayout>

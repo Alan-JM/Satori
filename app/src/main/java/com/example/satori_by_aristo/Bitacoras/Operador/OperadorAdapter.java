@@ -4,58 +4,59 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import android.widget.BaseAdapter;
 
 import com.example.satori_by_aristo.R;
 
 import java.util.List;
 
-public class OperadorAdapter extends ArrayAdapter<Perfil> {
+public class OperadorAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Perfil> operadores;
+    private List<OperadorStats> operadores;
 
-    public OperadorAdapter(Context context, List<Perfil> operadores) {
-        super(context, R.layout.item_operador, operadores);
+    public OperadorAdapter(Context context, List<OperadorStats> operadores) {
         this.context = context;
         this.operadores = operadores;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public int getCount() {
+        return operadores.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return operadores.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.item_operador, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_operador, parent, false);
         }
 
-        Perfil operador = operadores.get(position);
+        OperadorStats operador = operadores.get(position);
 
-        TextView tvNombre = convertView.findViewById(R.id.tvNombreOperador);
-        TextView tvCorreo = convertView.findViewById(R.id.tvCorreoOperador);
-        TextView tvTelefono = convertView.findViewById(R.id.tvTelefonoOperador);
+        TextView txtNombre = convertView.findViewById(R.id.txtNombre);
+        TextView txtNumViajes = convertView.findViewById(R.id.txtNumViajes);
+        TextView txtPromKm = convertView.findViewById(R.id.txtPromKm);
+        TextView txtPromGasto = convertView.findViewById(R.id.txtPromGasto);
+        TextView txtTotalKm = convertView.findViewById(R.id.txtTotalKm);
+        TextView txtTotalGasto = convertView.findViewById(R.id.txtTotalGasto);
 
-        tvNombre.setText(operador.getNombre());
-        tvCorreo.setText(operador.getCorreo());
-        tvTelefono.setText(operador.getTelefono());
-
-        // Al hacer clic, cargamos el detalle en el mismo fragmento (contenedorDetalle)
-        convertView.setOnClickListener(v -> {
-            DetalleOperadorFragment detalle = DetalleOperadorFragment.newInstance(
-                    operador.getNombre(),
-                    operador.getCorreo(),
-                    operador.getTelefono()
-            );
-
-            ((FragmentActivity) context).getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.contenedorDetalle, detalle)
-                    .commit();
-        });
+        txtNombre.setText(operador.getNombre());
+        txtNumViajes.setText(String.valueOf(operador.getNumViajes()));
+        txtPromKm.setText(String.format("%.2f", operador.getPromKm()));
+        txtPromGasto.setText(String.format("%.2f", operador.getPromGasto()));
+        txtTotalKm.setText(String.format("%.2f", operador.getTotalKm()));
+        txtTotalGasto.setText(String.format("%.2f", operador.getTotalGasto()));
 
         return convertView;
     }
