@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ViajesAdapter extends ArrayAdapter<ViajeDto> {
@@ -28,6 +29,9 @@ public class ViajesAdapter extends ArrayAdapter<ViajeDto> {
     private List<ViajeDto> viajes;
     private OnViajeActionListener listener;
     private RequestQueue queue;
+
+    // Caché para evitar hacer la misma petición de perfil muchas veces
+    private HashMap<String, String> nombresCache = new HashMap<>();
 
     public interface OnViajeActionListener {
         void onEdit(ViajeDto viaje);
@@ -50,13 +54,49 @@ public class ViajesAdapter extends ArrayAdapter<ViajeDto> {
             convertView = LayoutInflater.from(context).inflate(R.layout.linersito, parent, false);
         }
 
-         TextView nombreOperador = convertView.findViewById(R.id.nombreOperador);
+        TextView nombreOperador = convertView.findViewById(R.id.nombreOperador);
+        TextView destinoOperador = convertView.findViewById(R.id.destinoOperador); // El nuevo TextView del XML
         ImageView imgEnviado = convertView.findViewById(R.id.enviado);
         ImageView imgProgreso = convertView.findViewById(R.id.oprogreso);
         ImageView btnEdit = convertView.findViewById(R.id.lapiz);
         ImageView btnDelete = convertView.findViewById(R.id.bote);
 
-        nombreOperador.setText(viaje.getOperador());
+        // --- INICIO DE LO NUEVO: Destino y Nombre del Perfil ---
+
+        // 1. Mostrar el destino
+        if (viaje.getDestino() != null && !viaje.getDestino().isEmpty()) {
+            destinoOperador.setText(viaje.getDestino());
+        } else {
+            destinoOperador.setText("Sin destino");
+        }
+
+        // 2. Buscar el nombre en base al teléfono (operador)
+        String telefono = viaje.getOperador();
+
+        if (nombresCache.containsKey(telefono)) {
+            // Si ya lo tenemos guardado, lo mostramos directo
+            nombreOperador.setText(nombresCache.get(telefono));
+        } else {
+            // Ponemos el número mientras esperamos la respuesta de la API
+            nombreOperador.setText(telefono);
+
+            String urlPerfil = context.getString(R.string.base_url) + "perfil/" + telefono;
+            JsonObjectRequest requestPerfil = new JsonObjectRequest(Request.Method.GET, urlPerfil, null,
+                    response -> {
+                        String nombre = response.optString("nombre", telefono);
+                        nombresCache.put(telefono, nombre); // Guardar en caché
+                        nombreOperador.setText(nombre);     // Actualizar el texto
+                    },
+                    error -> {
+                        nombresCache.put(telefono, telefono); // Si falla, dejamos el número
+                    }
+            );
+            queue.add(requestPerfil);
+        }
+
+        // --- FIN DE LO NUEVO ---
+
+        // --- TU LÓGICA DE ICONOS ORIGINAL INTACTA ---
 
         //  enviado
         if (viaje.getEnviado() != null) {
@@ -113,7 +153,7 @@ public class ViajesAdapter extends ArrayAdapter<ViajeDto> {
             jsonBody.put("fecha", viaje.getFecha());
             jsonBody.put("password", viaje.getPassword());
 
-             if (viaje.getCliente() != null) {
+            if (viaje.getCliente() != null) {
                 jsonBody.put("cliente", viaje.getCliente());
             }
             if (viaje.getDestino() != null) {

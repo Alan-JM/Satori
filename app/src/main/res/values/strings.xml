@@ -22,9 +22,9 @@
 
 
     <!-- Aca esta la ip para que la modifiquen , no olviden cambiarla en el network_security_config -->
-    <string name="ip">ip</string>
-    <string name="url_ip">http://ip</string>
-    <string name="base_url">http://ip/xx/xx/</string>
+    <string name="ip">IP</string>
+    <string name="url_ip">http://IP</string>
+    <string name="base_url">http://IP/XX/XX/</string>
 
 
 </resources>

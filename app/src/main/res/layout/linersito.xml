@@ -11,19 +11,34 @@
     android:layout_marginBottom="12dp"
     android:elevation="4dp">
 
-    <!-- Nombre del operador -->
-    <TextView
-        android:id="@+id/nombreOperador"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.45"
-        android:text="Operador X"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/negro_suave"
-        android:paddingEnd="6dp" />
+        android:orientation="vertical"
+        android:paddingEnd="6dp">
 
-    <!-- Icono enviado -->
+        <TextView
+            android:id="@+id/nombreOperador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cargando..."
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/negro_suave" />
+
+        <TextView
+            android:id="@+id/destinoOperador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Destino no asignado"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/enviado"
         android:layout_width="0dp"
@@ -33,7 +48,6 @@
         android:layout_marginEnd="6dp"
         app:tint="@color/naranja_boton" />
 
-    <!-- Icono en progreso -->
     <ImageView
         android:id="@+id/oprogreso"
         android:layout_width="0dp"
@@ -43,7 +57,6 @@
         android:layout_marginEnd="6dp"
         app:tint="@color/naranja_boton" />
 
-    <!-- Icono lápiz -->
     <ImageView
         android:id="@+id/lapiz"
         android:layout_width="0dp"
@@ -53,7 +66,6 @@
         android:layout_marginEnd="6dp"
         app:tint="@color/negro_suave" />
 
-    <!-- Icono bote -->
     <ImageView
         android:id="@+id/bote"
         android:layout_width="0dp"

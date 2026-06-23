@@ -221,6 +221,17 @@
             android:textColor="@color/blanco_hueso"
             android:backgroundTint="@color/negro_suave"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Botón de AI -->
+
+        <Button
+            android:id="@+id/btnsAtorI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SATORI"
+            android:textStyle="bold"
+            android:textColor="@color/blanco_hueso"
+            android:backgroundTint="@color/orange"/>
     </LinearLayout>
 </ScrollView>

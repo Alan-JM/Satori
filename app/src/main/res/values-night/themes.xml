@@ -3,14 +3,14 @@
     <!-- Tema principal de la app -->
     <style name="Theme.Satori_by_Aristo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Colores principales -->
-        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimary">@color/naranja_boton</item>
         <item name="colorPrimaryVariant">@color/orange_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/grey</item>
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- SOLUCIÓN: Control de barras del sistema y Action Bar -->
-        <item name="android:statusBarColor">@color/orange_dark</item>
+        <item name="android:statusBarColor">@color/naranja_boton</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">false</item>
@@ -18,8 +18,8 @@
 
     <!-- Variante sin ActionBar (para usar tu MaterialToolbar) -->
     <style name="Theme.Satori_by_Aristo.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/orange</item>
-        <item name="colorPrimaryVariant">@color/orange_dark</item>
+        <item name="colorPrimary">@color/naranja_boton</item>
+        <item name="colorPrimaryVariant">@color/naranja_boton</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/grey</item>
         <item name="colorOnSecondary">@color/black</item>

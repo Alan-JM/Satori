@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -15,8 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Satori_by_Aristo"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
-
+        tools:targetApi="31">
+        <activity
+            android:name=".AI.AI"
+            android:exported="true" />
         <activity
             android:name=".Bitacoras.Operador.ContrasenaViaje"
             android:exported="false" />
@@ -31,7 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".Anticipos.NuevoAnticipo"
-            android:exported="false" /> <!-- Tus otras actividades -->
+            android:exported="false" />
         <activity
             android:name=".Bitacoras.Operador.NuevaBitacora3"
             android:exported="false" />
@@ -40,7 +50,7 @@
             android:exported="false" />
         <activity
             android:name=".Bitacoras.Operador.NuevaBitacora1"
-            android:exported="false" /> <!-- Aquí está la corrección -->
+            android:exported="false" />
         <activity
             android:name=".Principal"
             android:exported="false"
@@ -56,7 +66,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

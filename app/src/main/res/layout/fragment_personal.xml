@@ -2,16 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/orange_light"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
 
-    <!-- Encabezados -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_header_gradient"
-        android:padding="8dp">
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
+        android:background="#33000000"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="4dp">
 
         <TextView
             android:layout_width="0dp"
@@ -19,7 +22,8 @@
             android:layout_weight="2"
             android:text="Operador"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
             android:gravity="center"/>
 
         <TextView
@@ -27,47 +31,64 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Viajes"
-            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textColor="#E0E0E0"
+            android:textSize="12sp"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Km/Viaje"
-            android:textColor="@android:color/white"
+            android:text="Km/V"
+            android:textStyle="bold"
+            android:textColor="#E0E0E0"
+            android:textSize="12sp"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Gasto/Viaje"
-            android:textColor="@android:color/white"
+            android:text="Gasto/V"
+            android:textStyle="bold"
+            android:textColor="#E0E0E0"
+            android:textSize="12sp"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Km Total"
-            android:textColor="@android:color/white"
+            android:text="Km Tot."
+            android:textStyle="bold"
+            android:textColor="#E0E0E0"
+            android:textSize="12sp"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Gasto Total"
-            android:textColor="@android:color/white"
+            android:text="G. Tot."
+            android:textStyle="bold"
+            android:textColor="#E0E0E0"
+            android:textSize="12sp"
             android:gravity="center"/>
     </LinearLayout>
 
-    <!-- ListView con tus items -->
     <ListView
         android:id="@+id/listOperadores"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@android:color/transparent" />
+
 </LinearLayout>

@@ -50,10 +50,10 @@ public class Principal extends AppCompatActivity {
         });
 
         setSupportActionBar(barraDeHerramientas);
-
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
+
 
         ActionBarDrawerToggle alternador = new ActionBarDrawerToggle(
                 this,

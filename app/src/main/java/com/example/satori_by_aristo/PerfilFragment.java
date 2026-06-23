@@ -18,18 +18,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.satori_by_aristo.AI.AI;
 import com.example.satori_by_aristo.Bitacoras.Operador.SesionUsuario;
 import com.example.satori_by_aristo.Bitacoras.Administrador.SesionAdmin;
 
 public class PerfilFragment extends Fragment {
 
-     TextView rolito, nombreito, telefonoito, correito;
-     CardView cardOperadores, cardAdmin;
+    TextView rolito, nombreito, telefonoito, correito;
+    CardView cardOperadores, cardAdmin;
 
 
-     TextView telefonoOperadorito, nombreOperadorito;
-     TextView adminito, telefonoAdminito;
-    Button botoncito;
+    TextView telefonoOperadorito, nombreOperadorito;
+    TextView adminito, telefonoAdminito;
+    Button botoncito, bia;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -50,10 +52,18 @@ public class PerfilFragment extends Fragment {
         telefonoAdminito = view.findViewById(R.id.telefono_adminito);
 
         botoncito = view.findViewById(R.id.btnCerrarSesion);
+        bia = view.findViewById(R.id.btnsAtorI);
+
         botoncito.setOnClickListener(v -> {
             SesionActual.obtenerInstancia().cerrarSesion();
             Intent intent = new Intent(requireContext(), MainActivity.class);
             startActivity(intent);
+            requireActivity().finish();
+        });
+
+        bia.setOnClickListener(view1 -> {
+            Intent ia = new Intent(requireContext(), AI.class);
+            startActivity(ia);
             requireActivity().finish();
         });
 
@@ -71,6 +81,7 @@ public class PerfilFragment extends Fragment {
             telefonoOperadorito.setText(telAdmin);
             cargarPerfilPorTelefono(telAdmin, nombreOperadorito);
 
+            // APLICADO: Solo visible para el operador
             cardOperadores.setVisibility(View.VISIBLE);
             cardAdmin.setVisibility(View.GONE);
 
@@ -86,7 +97,8 @@ public class PerfilFragment extends Fragment {
             adminito.setText("Operador X");
             telefonoAdminito.setText("555-9999");
 
-            cardAdmin.setVisibility(View.VISIBLE);
+            // APLICADO: Mantenemos el cardAdmin oculto como pediste
+            cardAdmin.setVisibility(View.GONE);
             cardOperadores.setVisibility(View.GONE);
 
         } else if (SesionActual.obtenerInstancia().esSupervisor()) {

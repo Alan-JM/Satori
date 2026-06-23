@@ -20,11 +20,12 @@
             android:id="@+id/top_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/orange"
+            android:background="#2A1B12"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
             app:title="@string/app_name"
             app:titleTextColor="@color/white"
             app:contentInsetStartWithNavigation="0dp" />
+
 
 
         <FrameLayout

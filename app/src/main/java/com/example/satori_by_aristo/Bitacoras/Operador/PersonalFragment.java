@@ -18,13 +18,15 @@ import com.example.satori_by_aristo.SesionActual;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PersonalFragment extends Fragment {
 
     private ListView listOperadores;
     private OperadorAdapter adapter;
-    private List<OperadorStats> operadores; // ahora usamos OperadorStats
+    private List<OperadorStats> operadores;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +47,7 @@ public class PersonalFragment extends Fragment {
             DetalleOperadorFragment detalleFragment = new DetalleOperadorFragment();
             Bundle args = new Bundle();
 
-            // MODIFICACIÓN 1: Extraemos y enviamos el teléfono en lugar del nombre
+            // Enviamos el teléfono en lugar del nombre para que la API de bitácoras funcione
             args.putString("nombreOperador", seleccionado.getTelefono());
 
             args.putInt("numViajes", seleccionado.getNumViajes());
@@ -68,74 +70,104 @@ public class PersonalFragment extends Fragment {
         String telSesion = SesionActual.obtenerInstancia().getTelefono();
         Log.d("PersonalFragment", "Teléfono en sesión: " + telSesion);
 
-        String urlOperadores = getString(R.string.base_url) + "operador/admin/" + telSesion;
-        Log.d("PersonalFragment", "URL llamada: " + urlOperadores);
+        // PASO 1: Obtener la tabla de perfiles para mapear teléfono -> nombre real
+        String urlPerfiles = getString(R.string.base_url) + "perfil";
 
-        JsonArrayRequest requestOperadores = new JsonArrayRequest(
+        JsonArrayRequest requestPerfiles = new JsonArrayRequest(
                 Request.Method.GET,
-                urlOperadores,
+                urlPerfiles,
                 null,
-                response -> {
-                    Log.d("PersonalFragment", "Respuesta recibida. Operadores: " + response.length());
-                    operadores.clear();
-
-                    if (response.length() == 0) {
-                        Log.w("PersonalFragment", "No se encontraron operadores para este admin");
-                        return;
-                    }
-
-                    for (int i = 0; i < response.length(); i++) {
+                responsePerfiles -> {
+                    Map<String, String> mapaNombres = new HashMap<>();
+                    for (int k = 0; k < responsePerfiles.length(); k++) {
                         try {
-                            JSONObject obj = response.getJSONObject(i);
-                            String nombre = obj.optString("clave"); // nombre real lo obtendrás de perfil
-                            String telefono = obj.optString("telefonoP");
-
-                            // Buscar sus bitácoras confirmadas
-                            String urlBitacoras = getString(R.string.base_url) + "bitacoras/operador/" + telefono;
-                            JsonArrayRequest requestBitacoras = new JsonArrayRequest(
-                                    Request.Method.GET,
-                                    urlBitacoras,
-                                    null,
-                                    responseBitacoras -> {
-                                        int numViajes = 0;
-                                        double totalKm = 0;
-                                        double totalGasto = 0;
-
-                                        for (int j = 0; j < responseBitacoras.length(); j++) {
-                                            try {
-                                                JSONObject bit = responseBitacoras.getJSONObject(j);
-                                                if (bit.optInt("confirmacion") == 3) {
-                                                    numViajes++;
-                                                    totalKm += bit.optDouble("distanciaTotal", 0);
-                                                    totalGasto += bit.optDouble("granTotal", 0);
-                                                }
-                                            } catch (Exception e) {
-                                                Log.e("PersonalFragment", "Error parseando bitácora", e);
-                                            }
-                                        }
-
-                                        // MODIFICACIÓN 2: Agregamos el 'telefono' al momento de instanciar OperadorStats
-                                        OperadorStats stats = new OperadorStats(nombre, telefono, numViajes, totalKm, totalGasto);
-                                        operadores.add(stats);
-                                        adapter.notifyDataSetChanged();
-                                    },
-                                    error -> Log.e("PersonalFragment", "Error en bitácoras", error)
-                            );
-                            Volley.newRequestQueue(requireContext()).add(requestBitacoras);
-
+                            JSONObject perfilObj = responsePerfiles.getJSONObject(k);
+                            mapaNombres.put(perfilObj.optString("telefono"), perfilObj.optString("nombre"));
                         } catch (Exception e) {
-                            Log.e("PersonalFragment", "Error parseando operador", e);
+                            Log.e("PersonalFragment", "Error parseando perfil", e);
                         }
                     }
 
-                    adapter = new OperadorAdapter(requireContext(), operadores);
-                    listOperadores.setAdapter(adapter);
+                    // PASO 2: Obtener los operadores asignados a este admin
+                    String urlOperadores = getString(R.string.base_url) + "operador/admin/" + telSesion;
+                    Log.d("PersonalFragment", "URL llamada: " + urlOperadores);
 
-                    Log.d("PersonalFragment", "Adapter asignado con " + operadores.size() + " operadores");
+                    JsonArrayRequest requestOperadores = new JsonArrayRequest(
+                            Request.Method.GET,
+                            urlOperadores,
+                            null,
+                            response -> {
+                                Log.d("PersonalFragment", "Respuesta recibida. Operadores: " + response.length());
+                                operadores.clear();
+
+                                if (response.length() == 0) {
+                                    Log.w("PersonalFragment", "No se encontraron operadores para este admin");
+                                    return;
+                                }
+
+                                for (int i = 0; i < response.length(); i++) {
+                                    try {
+                                        JSONObject obj = response.getJSONObject(i);
+                                        String clave = obj.optString("clave");
+                                        String telefono = obj.optString("telefonoP");
+
+                                        // Asignamos el nombre real buscándolo en el mapa (si no existe, dejamos la clave como respaldo)
+                                        String nombreReal = mapaNombres.containsKey(telefono) ? mapaNombres.get(telefono) : clave;
+
+                                        // PASO 3: Buscar sus bitácoras confirmadas
+                                        String urlBitacoras = getString(R.string.base_url) + "bitacoras/operador/" + telefono;
+                                        JsonArrayRequest requestBitacoras = new JsonArrayRequest(
+                                                Request.Method.GET,
+                                                urlBitacoras,
+                                                null,
+                                                responseBitacoras -> {
+                                                    int numViajes = 0;
+                                                    double totalKm = 0;
+                                                    double totalGasto = 0;
+
+                                                    for (int j = 0; j < responseBitacoras.length(); j++) {
+                                                        try {
+                                                            JSONObject bit = responseBitacoras.getJSONObject(j);
+                                                            if (bit.optInt("confirmacion") == 3) {
+                                                                numViajes++;
+                                                                totalKm += bit.optDouble("distanciaTotal", 0);
+                                                                totalGasto += bit.optDouble("granTotal", 0);
+                                                            }
+                                                        } catch (Exception e) {
+                                                            Log.e("PersonalFragment", "Error parseando bitácora", e);
+                                                        }
+                                                    }
+
+                                                    // Instanciamos con el nombre real de la tabla Perfil
+                                                    OperadorStats stats = new OperadorStats(nombreReal, telefono, numViajes, totalKm, totalGasto);
+                                                    operadores.add(stats);
+
+                                                    // Actualizamos el adaptador una vez que tenemos la información
+                                                    if (adapter == null) {
+                                                        adapter = new OperadorAdapter(requireContext(), operadores);
+                                                        listOperadores.setAdapter(adapter);
+                                                    } else {
+                                                        adapter.notifyDataSetChanged();
+                                                    }
+                                                },
+                                                error -> Log.e("PersonalFragment", "Error en bitácoras", error)
+                                        );
+                                        Volley.newRequestQueue(requireContext()).add(requestBitacoras);
+
+                                    } catch (Exception e) {
+                                        Log.e("PersonalFragment", "Error parseando operador", e);
+                                    }
+                                }
+                                Log.d("PersonalFragment", "Peticiones de bitácoras enviadas");
+                            },
+                            error -> Log.e("PersonalFragment", "Error en operadores", error)
+                    );
+                    Volley.newRequestQueue(requireContext()).add(requestOperadores);
+
                 },
-                error -> Log.e("PersonalFragment", "Error en operadores", error)
+                errorPerfiles -> Log.e("PersonalFragment", "Error cargando perfiles", errorPerfiles)
         );
 
-        Volley.newRequestQueue(requireContext()).add(requestOperadores);
+        Volley.newRequestQueue(requireContext()).add(requestPerfiles);
     }
 }

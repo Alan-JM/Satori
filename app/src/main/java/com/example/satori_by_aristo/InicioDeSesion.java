@@ -83,9 +83,9 @@ public class InicioDeSesion extends AppCompatActivity {
                 },
                 error -> {
                     error.printStackTrace();
-                    Toast.makeText(this,
-                            "Error actualizando teléfono operador",
-                            Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this,
+//                            "Error actualizando teléfono operador",
+//                            Toast.LENGTH_LONG).show();
                 }
         );
 
